@@ -23,7 +23,7 @@ h2, h3 {
   font-family: petitevoisine, sans-serif; }
 
 h2 {
-  color: #28ccfb; }
+  color: #FFCD00; }
 
 h3 {
   color: #65767B;
@@ -46,7 +46,7 @@ h3 {
     width: 30%; }
 
 .side-blocks a.strip {
-  background-color: #01acdd;
+  background-color: #9B7D00;
   font-weight: bold;
   font-size: 14px;
   display: block;
@@ -58,7 +58,7 @@ h3 {
 .side-blocks a.strip:hover {
   background: white;
   color: #555;
-  border: 4px solid #01acdd;
+  border: 4px solid #9B7D00;
   padding: 6px 11px;
   text-decoration: none; }
 
@@ -66,27 +66,27 @@ h3 {
   color: #666; }
   .side-blocks a.list-item span {
     margin-right: 10px;
-    color: #01acdd; }
+    color: #9B7D00; }
 
 .tags-cloud a {
-  background: #bcef5b;
+  background: #FFAA39;
   padding: 4px 14px;
   margin: 2px 5px;
   display: block;
   float: left;
   border-radius: 38px;
   color: #65767B;
-  border: 1px solid #bcef5b;
+  border: 1px solid #FFAA39;
   text-decoration: none; }
 
 .tags-cloud a:hover {
-  background: #07c3f8;
-  border: 1px solid #07c3f8;
+  background: #C69F00;
+  border: 1px solid #C69F00;
   color: #65767B; }
 
 .tags-cloud-2 a {
-  background-color: #bcef5b;
-  border-color: #bcef5b; }
+  background-color: #FFAA39;
+  border-color: #FFAA39; }
 
 .tags-cloud-2 a:hover {
   background: #FFF;
@@ -94,7 +94,7 @@ h3 {
   color: #FC0; }
 
 .detail-description-inner {
-  border: 2px dashed #01acdd;
+  border: 2px dashed #9B7D00;
   padding: 10px;
   margin: 10px 0;
   box-shadow: -5px 5px 0 rgba(0, 0, 0, 0.1); }

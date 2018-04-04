@@ -23,11 +23,11 @@ li {
       opacity: .2; }
   li.active a {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffcc00+0,ffb600+100 */
-    background: #bcef5b;
+    background: #FFAA39;
     /* Old browsers */
     color: #65767B;
-    border-color: #bcef5b;
-    border-bottom: 1px solid #bcef5b; }
+    border-color: #FFAA39;
+    border-bottom: 1px solid #FFAA39; }
     li.active a .glyphicon {
       opacity: .7; }
   li.active .counter {

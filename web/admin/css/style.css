@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: 'petitevoisineexpanded';
   src: url("../../common/fonts/petitevoisine/petite_voisine_bold_final-webfont.woff2") format("woff2"), url("../../common/fonts/petitevoisine/petite_voisine_bold_final-webfont.woff") format("woff");
@@ -9,7 +10,7 @@
   src: url("/common/fonts/patrickhands/PatrickHandSC-Regular.ttf"); }
 
 .btn-primary-lgv {
-  background: #28ccfb;
+  background: #FFCD00;
   border-radius: 0; }
 
 .table tbody tr td.padded-value {
@@ -21,14 +22,16 @@
 
 .logo-circle {
   position: absolute;
-  background: #28ccfb;
+  background: #FFCD00;
   border-radius: 1000px;
   z-index: 100;
   width: 110px;
   height: 110px;
-  /*padding: 12px 10px;*/
+  padding: 12px 10px;
   top: -27px;
-  /*border: 7px dotted #FFF;*/ }
+  border: 7px dotted #FFF; }
+  .logo-circle img {
+    width: 80px; }
   .logo-circle h1 {
     display: none; }
 
@@ -43,11 +46,11 @@
   font-family: Quicksand; }
 
 a {
-  color: #07c3f8; }
+  color: #C69F00; }
 
 a:hover {
   text-decoration: none;
-  color: #069cc6;
+  color: #937600;
   animation: aHover 3s forwards; }
 
 @keyframes aHover {
@@ -59,7 +62,7 @@ a:hover {
     text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1); } }
 
 header {
-  background: #28ccfb;
+  background: #FFCD00;
   min-height: 60px; }
   header .semapps-logo-mini-inner {
     width: 100px;
@@ -87,7 +90,7 @@ footer {
     letter-spacing: normal;
     font-size: 18px; }
     footer .about-av a {
-      color: #28ccfb; }
+      color: #FFCD00; }
 
 h2, label, input[type=submit] {
   font-family: petitevoisine, sans-serif; }
@@ -112,7 +115,7 @@ input[type=submit] {
 
 input[type=submit]:hover {
   color: #FFF;
-  background: #07c3f8; }
+  background: #C69F00; }
 
 input.form-control {
   border-radius: 0; }
@@ -214,10 +217,10 @@ input.form-control {
 
 .page-header {
   font-family: petitevoisine, sans-serif;
-  border-bottom: 4px dashed #28ccfb;
+  border-bottom: 4px dashed #FFCD00;
   color: #65767B; }
   .page-header .glyphicon {
-    color: #28ccfb; }
+    color: #FFCD00; }
 
 .page-content {
   min-height: 60vh; }
@@ -227,7 +230,7 @@ input.form-control {
   height: 800px;
   min-height: 500px;
   width: 100%;
-  background: #161415 url(../../common/images/banner.jpg) no-repeat top center;
+  background: #161415;
   background-size: cover !important;
   -webkit-background-size: cover !important;
   text-align: center;
@@ -240,7 +243,7 @@ input.form-control {
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a {
   box-shadow: none;
-  background: #bcef5b;
+  background: #FFAA39;
   color: #65767B; }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -252,10 +255,10 @@ input.form-control {
   .nav-tabs li.active a .glyphicon,
   .nav-tabs li a .glyphicon {
     margin-right: 8px;
-    color: #bcef5b; }
+    color: #FFAA39; }
 
 .list {
-  color: #28ccfb; }
+  color: #FFCD00; }
   .list li span {
     color: #65767B; }
 
@@ -281,7 +284,10 @@ input.form-control {
 
 .block-banner-overflow,
 .block-banner-overflow-transparent {
-  margin-top: 450px;
+  margin-top: 50vh;
+  /* poussé de la moitié de hauteur de viewport */
+  transform: translateY(-50%);
+  /* tiré de la moitié de sa propre hauteur */
   padding: 10px 40px; }
 
 .logo-circle {
@@ -343,7 +349,7 @@ input.form-control {
   margin-bottom: 5px;
   margin-right: 5px; }
   .select2-tags .tags .tag {
-    background: #bcef5b;
+    background: #FFAA39;
     padding: 5px 11px;
     display: block;
     float: left;

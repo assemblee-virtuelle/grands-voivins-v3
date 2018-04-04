@@ -201,7 +201,7 @@ input.form-control {
   height: 800px;
   min-height: 500px;
   width: 100%;
-  background: #161415 url(../../common/images/banner.jpg) no-repeat top center;
+  background: #161415; //url(../../common/images/banner.jpg) no-repeat top center;
   background-size: cover !important;
   -webkit-background-size: cover !important;
   text-align: center;
@@ -270,7 +270,10 @@ input.form-control {
 
 .block-banner-overflow,
 .block-banner-overflow-transparent {
-  margin-top: 450px;
+  //vertical-align: middle;
+  //margin-top: 450px;
+  margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
   padding: 10px 40px;
 }
 
