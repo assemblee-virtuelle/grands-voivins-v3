@@ -226,7 +226,7 @@ class AdministrationController extends Controller
         Bonjour ".$email." !<br><br> 
                         Ton voisin ".$this->getUser()->getEmail(). " t’invite à te créer un compte sur la cartographie ".$website." !<br><br>
                         Pour t’inscrire sur cette plateforme, il faut <a href='".$url."'>cliquer ici</a> <br>
-                        Si le lien ne fonctionne pas, veuillez copier-coller ce lien dans un navigateur : <br>".$url."<br><br>
+                        Si cela ne fonctionne pas, il suffit de copier-coller ce lien dans un navigateur : <br>".$url."<br><br>
                         <br>
                         A très bientôt :-)";
         $mailer->sendMessage($email,$sujet,$content);
