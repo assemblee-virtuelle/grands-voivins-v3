@@ -221,10 +221,11 @@ class AdministrationController extends Controller
         $mailer = $this->get('semapps_bundle.event_listener.send_mail');
         $website = $this->getParameter('carto.domain');
         $url = "http://".$website.'/register/'.$token;
-        $sujet = "[".$website."] Vous avez reçu une invitation !";
-        $content= "Bonjour ".$email." !<br><br> 
-                        L'utilisateur ".$this->getUser()->getEmail(). " vous a invité à vous créer un compte sur le site ".$website." !<br><br>
-                        Pour créer votre compte sur la plateforme, veuillez <a href='".$url."'>cliquer ici</a> <br>
+        $sujet = "[".$website."] Vous avez reçu une invitation à rejoindre la cartographie";
+        $content= "
+        Bonjour ".$email." !<br><br> 
+                        Ton voisin ".$this->getUser()->getEmail(). " t’invite à te créer un compte sur la cartographie ".$website." !<br><br>
+                        Pour t’inscrire sur cette plateforme, il faut <a href='".$url."'>cliquer ici</a> <br>
                         Si le lien ne fonctionne pas, veuillez copier-coller ce lien dans un navigateur : <br>".$url."<br><br>
                         <br>
                         A très bientôt :-)";
