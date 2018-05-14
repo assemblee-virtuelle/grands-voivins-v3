@@ -20,20 +20,18 @@
             this.$window = $(window);
             this.detailAddress= [];
             this.entities = {
-                "http://virtual-assembly.org/pair#Person":{
-                    name: 'Personne',
-                    plural: 'Personnes',
-                    icon: 'user',
-                    markerColor: '#28ccfb',
-                }
-                ,
                 "http://virtual-assembly.org/pair#Organization":{
                     name: 'Organisation',
                     plural: 'Organisations',
                     icon: 'tower',
                     markerColor: '#01acdd',
-                }
-                ,
+                },
+                "http://virtual-assembly.org/pair#Person":{
+                    name: 'Personne',
+                    plural: 'Personnes',
+                    icon: 'user',
+                    markerColor: '#28ccfb',
+                },
                 "http://virtual-assembly.org/pair#Project":{
                     name: 'Projet',
                     plural: 'Projets',

@@ -25,3 +25,4 @@ web/cookie.txt
 /web/fake_service
 package-lock.json
 composer.lock
+.vscode/settings.json
