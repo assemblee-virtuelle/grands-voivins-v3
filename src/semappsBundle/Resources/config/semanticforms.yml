@@ -12,11 +12,12 @@ imports:
     - { resource: "@semappsBundle/Resources/config/SemanticForms/organizationtypeConf.yml" }
     - { resource: "@semappsBundle/Resources/config/SemanticForms/dbpedia.yml" }
     - { resource: "@semappsBundle/Resources/config/SemanticForms/thematicConf.yml" }
+    - { resource: "@semappsBundle/Resources/config/SemanticForms/documentTestConf.yml" }
 
 parameters:
   typeToName:
-    http://virtual-assembly.org/pair#Person: 'person'
     http://virtual-assembly.org/pair#Organization: 'organization'
+    http://virtual-assembly.org/pair#Person: 'person'
     http://virtual-assembly.org/pair#Project: 'project'
     http://virtual-assembly.org/pair#Event: 'event'
     http://virtual-assembly.org/pair#Proposal: 'proposal'
