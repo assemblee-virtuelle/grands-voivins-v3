@@ -82,6 +82,12 @@ Polymer({
         }
     },
 
+    callsearch(ev){
+        let checkbox = $(document.getElementById("isGV"));
+        checkbox.toggleClass('checked');
+        this.searchRender();
+    },
+
     search(term, building) {
         "use strict";
         let filterUri = this.$searchThemeFilter.val();
@@ -154,7 +160,6 @@ Polymer({
                     typesCounter[result.type] = typesCounter[result.type] || 0;
                     typesCounter[result.type]++;
                     totalCounter++;
-
                     if (typeof resultTemps[result.type] === 'undefined')
                         resultTemps[result.type] = [];
                     resultTemps[result.type].push(result);
@@ -169,7 +174,7 @@ Polymer({
                     }
                 }
             }
-
+            
             // semapps.map.pinShowAll();
             if(typeof resultTemps[this.typeSelected] === 'undefined' ){
                 // Deselect tab if current.
@@ -178,16 +183,14 @@ Polymer({
                 results =(typeof resultTemps[this.typeSelected] !== 'undefined' )? resultTemps[Object.keys(resultTemps)[0]] : [];
             }
             else{
-                results = resultTemps[this.typeSelected];
+                results = this.filterNonGrandVoisins(resultTemps[this.typeSelected]);
             }
             // Create title.
             let resultsTitle = '';
             // Results number.
             resultsTitle += (results.length) ? results.length + ' résultats ' : 'Aucun résultat  ';
-            // Building.
             // Display title.
             this.resultsTitle = resultsTitle;
-
             // Display no results section or not.
             this.noResult = results.length === 0;
 
@@ -213,5 +216,36 @@ Polymer({
         if (this.tabsRegistry[val]) {
             this.tabsRegistry[val].$$('li').classList.add('active');
         }
+    },
+
+    filterNonGrandVoisins(results){
+        let isgv = true;
+        let filter = document.getElementById("orgaGvFilter");
+        let checkbox = document.getElementById("isGV");
+
+        
+        if ($(checkbox).hasClass('checked') == true){
+            isgv = true;
+        } else {
+            isgv = false;
+        }
+        if (this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+            filter.style.display = "initial";
+            if (isgv === true)
+            {
+                let filteredResults = [];
+                results.forEach((e) => {
+                    if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
+                    e["address"] === "72 Avenue Denfert-Rochereau 75014 Paris" ||
+                    e["address"] === "82 Avenue Denfert-Rochereau 75014 Paris"){
+                        filteredResults.push(e);
+                    }
+                })
+                results = filteredResults;
+            }
+        } else{
+            filter.style.display = "none";
+        }
+        return results;
     }
 });

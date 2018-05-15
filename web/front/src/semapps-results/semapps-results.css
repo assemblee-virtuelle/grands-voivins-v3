@@ -42,4 +42,20 @@
     float: left;
     display: block;
     clear: both;
-    width: 100%; } }
+    width: 100%; 
+  } 
+}
+
+#orgaGvFilter{
+  display:none;
+  padding: 5px;
+  border: 2px dashed #949494;
+}
+
+#isGV{
+  margin-bottom: 15px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+  border-radius: 3px 3px 3px 3px;
+}

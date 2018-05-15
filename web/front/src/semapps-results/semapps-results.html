@@ -15,6 +15,10 @@
       <div class="col col-sm-12">
         <div class="clearfix"></div>
         <h3 class="resultsTitle">[[resultsTitle]]</h3>
+        <span id="orgaGvFilter">
+          <label for="isGV">Limiter la recherche aux Grands Voisins ?</label>
+          <input class="checked" type="checkbox" id="isGV" checked="true" on-change="callsearch">
+        </span>
         <div id="searchResults" class="col col-sm-12">
           <template is="dom-repeat" items="{{results}}">
             <semapps-results-item data="[[item]]"></semapps-results-item>
