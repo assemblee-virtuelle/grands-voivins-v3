@@ -60,6 +60,13 @@
                     markerColor: '#a4de37',
                 }
                 ,
+                "http://virtual-assembly.org/pair#Good":{
+                    name: 'Good',
+                    plural: 'Goods',
+                    icon: 'gift',
+                    markerColor: '#a4de37',
+                }
+                ,
                 "urn://semapps/thesaurus/documenttype":{
                     name: 'Type de document',
                     plural: 'Types de document',

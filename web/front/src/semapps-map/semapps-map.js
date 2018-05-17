@@ -67,6 +67,10 @@ Polymer({
                 icon: 'folder-open',
                 markerColor: 'black'
             }),
+            "http://virtual-assembly.org/pair#Good":L.AwesomeMarkers.icon({
+                icon: 'shop',
+                markerColor: 'black'
+            }),
         }
         hider();
 

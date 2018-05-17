@@ -61,6 +61,7 @@ class WebserviceTools
         $typeEvent= array_key_exists(semappsConfig::URI_PAIR_EVENT,$arrayType);
         $typeDocument= array_key_exists(semappsConfig::URI_PAIR_DOCUMENT,$arrayType);
         $typeProposition= array_key_exists(semappsConfig::URI_PAIR_PROPOSAL,$arrayType);
+        $typeGood = array_key_exists(semappsConfig::URI_PAIR_GOOD,$arrayType);
         $typeThesaurus= array_key_exists(semappsConfig::URI_SKOS_THESAURUS,$arrayType);
         $sparqlClient = new SparqlClient();
         /** @var \VirtualAssembly\SparqlBundle\Sparql\sparqlSelect $sparql */
@@ -173,6 +174,18 @@ class WebserviceTools
             $results = $this->sfClient->sparql($documentSparql->getQuery());
             $documents= $this->sfClient->sparqlResultsValues($results,'uri');
         }
+        $goods = [];
+        if((($type == semappsConfig::Multiple || $typeGood) ) ){
+            $goodSparql = clone $sparql;
+            $goodSparql->addSelect('?title')
+                ->addWhere('?uri','rdf:type', $sparql->formatValue(semappsConfig::URI_PAIR_GOOD,$sparql::VALUE_TYPE_URL),'?GR')
+                ->addWhere('?uri','pair:preferedLabel','?title','?GR')
+                ->addOptional('?uri','pair:comment','?desc','?GR');
+            //$goodSparql->addOptional('?uri','pair:building','?building','?GR');
+            if($term)$goodSparql->addFilter('contains( lcase(?title)  , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) || contains( lcase(?address) , lcase("'.$term.'"))');
+            $results = $this->sfClient->sparql($goodSparql->getQuery());
+            $goods= $this->sfClient->sparqlResultsValues($results,'uri');
+        }
         $thematiques = [];
         if($type == semappsConfig::Multiple || $typeThesaurus ){
             $thematiqueSparql = clone $sparql;
@@ -184,7 +197,7 @@ class WebserviceTools
             $thematiques = $this->sfClient->sparqlResultsValues($results,'uri');
         }
 
-        $results = array_merge($organizations,$persons,$projects,$events,$propositions,$thematiques,$documents);
+        $results = array_merge($organizations,$persons,$projects,$events,$propositions,$thematiques,$documents,$goods);
         return $results;
     }
 
@@ -282,7 +295,7 @@ class WebserviceTools
                     default:
                         switch ($simpleKey){
                             case 'description':
-//                                $properties[$simpleKey] = nl2br(current($properties[$simpleKey]),false);
+                                //$properties[$simpleKey] = nl2br(current($properties[$simpleKey]),false);
                                 $properties[$simpleKey] = $this->parser->transformMarkdown(current($properties[$simpleKey]));
                                 break;
 
@@ -324,6 +337,9 @@ class WebserviceTools
                 break;
             // document
             case semappsConfig::URI_PAIR_DOCUMENT:
+                $output['title'] = current($properties['preferedLabel']);
+                break;
+            case semappsConfig::URI_PAIR_GOOD:
                 $output['title'] = current($properties['preferedLabel']);
                 break;
             case semappsConfig::URI_SKOS_CONCEPT:

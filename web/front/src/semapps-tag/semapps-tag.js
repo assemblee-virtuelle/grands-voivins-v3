@@ -38,6 +38,9 @@ Polymer({
             case 'documenttype':
                 this.color = semapps.entities["http://virtual-assembly.org/pair#Document"].markerColor;
                 break;
+            case 'good':
+                this.color = semapps.entities["http://virtual-assembly.org/pair#Good"].markerColor;
+                break;
             default:
                 this.color = '#01acdd';
         }

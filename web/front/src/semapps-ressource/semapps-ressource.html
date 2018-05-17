@@ -218,6 +218,15 @@
             <div class="clearfix"></div>
           </div>
         </template>
+        <template is="dom-if" if="[[hasSubject.good]]">
+          <h3>Mot-clé de (bien)</h3>
+          <div>
+            <template is="dom-repeat" items="{{hasSubject.good}}">
+              <semapps-tag uri="{{ item.uri }}" route="handleClickDetail" name="{{item.label}}" type="good"></semapps-tag>
+            </template>
+            <div class="clearfix"></div>
+          </div>
+        </template>
     </div>
     </div>
       <template is="dom-if" if="[[loading]]">
@@ -227,5 +236,5 @@
     </template>
     </div>
   </template>
-  <script src="semapps-ressource.min.js"></script>
+  <script src="semapps-ressource.js"></script>
 </dom-module>
