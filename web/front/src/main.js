@@ -244,8 +244,12 @@
             if (!path) {
                 if(semapps.entities.hasOwnProperty(key))
                     return '/common/images/result-no_picture-' + semapps.entities[key].nameType + '.png';
+                else
+                    return null;
+            } else if (path.indexOf("http")) {
+                return path;
             }
-            return path;
+            return window.location.host + path;
         }
         haveName(){
             return this.user.name !== '';

@@ -45,7 +45,7 @@
                     <a href="#" id="profilePicture" class="thumbnail" data-toggle="tooltip" data-placement="bottom" title="Cliquez ici pour télécharger une image (2Mo max !)">
                         <img src="{{ asset(image == null ? 'common/images/no_avatar.png' : 'uploads/pictures/'~image) | imagine_filter('profile') }}"/>
                         <span id="profileEditPictureField">
-                            {{ form_widget(form.goodPicture) }}
+                            {{ form_widget(form.componentPicture) }}
                         </span>
                     </a>
                     {% endif %}

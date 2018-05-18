@@ -155,11 +155,11 @@ class PersonType extends SemanticFormType
                     'required'  => false,
                     'rdfType'   => semappsConfig::URI_PAIR_EVENT,
                 ]
-            )
+            )/* 
             ->add(
                 $builder,
                 'offers',
-                DbPediaType::class,
+                UriType::class,
                 [
                     'required' => false,
                 ]
@@ -167,11 +167,11 @@ class PersonType extends SemanticFormType
             ->add(
                 $builder,
                 'needs',
-                DbPediaType::class,
+                UriType::class,
                 [
                     'required' => false,
                 ]
-            )
+            )*/
             ->add(
                 $builder,
                 'hasSubject',

@@ -190,22 +190,22 @@
         </template>
         <!-- end of manages -->
         <!-- offers -->
-        <template is="dom-if" if="[[offers.length]]">
+        <template is="dom-if" if="[[offers.good.length]]">
           <h3>Propose</h3>
           <div>
-            <template is="dom-repeat" items="{{offers}}">
-              <semapps-tag uri="{{ item.uri }}" route="handleClickRessource" name="{{item.name}}" type="dbpedia"></semapps-tag>
+            <template is="dom-repeat" items="{{offers.good}}">
+              <semapps-tag uri="{{ item.uri }}" route="handleClickDetail" name="{{item.name}}" type="good"></semapps-tag>
             </template>
             <div class="clearfix"></div>
           </div>
         </template>
         <!-- end of offers -->
         <!-- needs -->
-        <template is="dom-if" if="[[needs.length]]">
+        <template is="dom-if" if="[[needs.good.length]]">
           <h3>A besoin de</h3>
           <div>
-            <template is="dom-repeat" items="{{needs}}">
-              <semapps-tag uri="{{ item.uri }}" route="handleClickRessource" name="{{item.name}}" type="dbpedia"></semapps-tag>
+            <template is="dom-repeat" items="{{needs.good}}">
+              <semapps-tag uri="{{ item.uri }}" route="handleClickDetail" name="{{item.name}}" type="good"></semapps-tag>
             </template>
             <div class="clearfix"></div>
           </div>
@@ -309,5 +309,5 @@
       </div>
     </div>
   </template>
-  <script src="semapps-detail-person.min.js"></script>
+  <script src="semapps-detail-person.js"></script>
 </dom-module>

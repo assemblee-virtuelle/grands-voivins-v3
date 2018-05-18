@@ -99,7 +99,7 @@ class GoodType extends SemanticFormType
         ;
 
         $builder->add(
-            'goodPicture',
+            'componentPicture',
             FileType::class,
             [
                 'data_class' => null,

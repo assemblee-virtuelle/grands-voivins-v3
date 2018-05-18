@@ -207,27 +207,27 @@
         </template>
         <!-- end of participantOf -->
         <!-- offers -->
-        <template is="dom-if" if="[[data.offers.length]]">
-          <h3>Offres</h3>
-          <div>
-            <template is="dom-repeat" items="{{data.offers}}">
-              <semapps-tag uri="{{ item.uri }}" route="handleClickRessource" name="{{item.name}}" type="dbpedia"></semapps-tag>
-            </template>
-            <div class="clearfix"></div>
-          </div>
-        </template>
-        <!-- end of offers -->
-        <!-- needs -->
-        <template is="dom-if" if="[[data.needs.length]]">
-          <h3>Besoins</h3>
-          <div>
-            <template is="dom-repeat" items="{{data.needs}}">
-              <semapps-tag uri="{{ item.uri }}" route="handleClickRessource" name="{{item.name}}" type="dbpedia"></semapps-tag>
-            </template>
-            <div class="clearfix"></div>
-          </div>
-        </template>
-        <!-- end of needs -->
+        <template is="dom-if" if="[[offers.good.length]]">
+            <h3>Propose</h3>
+            <div>
+              <template is="dom-repeat" items="{{offers.good}}">
+                <semapps-tag uri="{{ item.uri }}" route="handleClickDetail" name="{{item.name}}" type="good"></semapps-tag>
+              </template>
+              <div class="clearfix"></div>
+            </div>
+          </template>
+          <!-- end of offers -->
+          <!-- needs -->
+          <template is="dom-if" if="[[needs.good.length]]">
+            <h3>A besoin de</h3>
+            <div>
+              <template is="dom-repeat" items="{{needs.good}}">
+                <semapps-tag uri="{{ item.uri }}" route="handleClickDetail" name="{{item.name}}" type="good"></semapps-tag>
+              </template>
+              <div class="clearfix"></div>
+            </div>
+          </template>
+          <!-- end of needs -->
         <!-- brainstorms -->
         <template is="dom-if" if="[[data.brainstorms.proposal.length]]">
           <h3>Proposition dont l'organisation est à l'origine</h3>

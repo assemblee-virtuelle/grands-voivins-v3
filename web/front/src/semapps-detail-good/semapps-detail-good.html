@@ -69,6 +69,26 @@
           </div>
           <div class="clearfix"></div>
         </template>
+        <template is="dom-if" if="[[data.offeredBy.organization.length]]">
+            <h3>Offert par ( organisation )</h3>
+            <div class="thumbs">
+              <template is="dom-repeat" items="{{data.offeredBy.organization}}">
+                <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                                label="[[item.name]]"></semapps-avatar>
+              </template>
+            </div>
+            <div class="clearfix"></div>
+          </template>
+          <template is="dom-if" if="[[data.neededBy.organization.length]]">
+            <h3>Demandé par ( organisation )</h3>
+            <div class="thumbs">
+              <template is="dom-repeat" items="{{data.neededBy.organization}}">
+                <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                                label="[[item.name]]"></semapps-avatar>
+              </template>
+            </div>
+            <div class="clearfix"></div>
+          </template>
         <template is="dom-if" if="[[hasSubject.length]]">
           <h3>Mots-clés</h3>
           <div>

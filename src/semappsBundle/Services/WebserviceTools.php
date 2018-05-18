@@ -223,6 +223,7 @@ class WebserviceTools
             case semappsConfig::URI_PAIR_PROPOSAL :
             case semappsConfig::URI_PAIR_EVENT :
             case semappsConfig::URI_PAIR_DOCUMENT :
+            case semappsConfig::URI_PAIR_GOOD :            
                 $sparql->addSelect('?label')
                     ->addWhere('?uri','pair:preferedLabel','?label','?gr');
 
@@ -358,11 +359,13 @@ class WebserviceTools
         $cacheTemp = [];
         $cacheComponentConf = [];
         foreach ($tabFieldsAlias as $alias) {
-            if (isset($properties[$alias])) {
+            if (isset($properties[$alias])) {                
                 foreach (array_unique($properties[$alias]) as $uri) {
+                    
                     if (array_key_exists($uri, $cacheTemp)) {
                         $output[$alias][$cacheComponentConf[$cacheTemp[$uri]['type']]['nameType']][] = $cacheTemp[$uri];
                     } else {
+                        
                         $component = $this->uriPropertiesFiltered($uri);
                         if(array_key_exists('type',$component)){
                             $componentType = current($component['type']);
@@ -380,8 +383,6 @@ class WebserviceTools
                                 $isPublic = $this->sparqlRepository->checkIsPublic($uri,$componentConf,$this->sparqlRepository::ISPUBLIC);
                             if(!$isPublic && array_key_exists('access', $componentConf) && array_key_exists('protected',$componentConf['access']))
                                 $isProtected = $this->sparqlRepository->checkIsPublic($uri,$componentConf,$this->sparqlRepository::ISPROTECTED);
-
-
                             if(!$isPublic && array_key_exists('access', $componentConf) && array_key_exists('read',$componentConf['access'])){
                                 if(!$this->tokenStorage->getToken()->getUser() instanceof User ){
                                     $isAllowed= false;
@@ -397,7 +398,6 @@ class WebserviceTools
                                     }
                                 }
                             }
-
                             $result = null;
                             if($isAllowed){
                                 switch ($componentConf['type']) {
@@ -415,6 +415,7 @@ class WebserviceTools
                                     case semappsConfig::URI_PAIR_EVENT:
                                     case semappsConfig::URI_PAIR_PROPOSAL:
                                     case semappsConfig::URI_PAIR_DOCUMENT:
+                                    case semappsConfig::URI_PAIR_GOOD:
                                         $result = [
                                             'uri' => $uri,
                                             'name' => ((current($component['preferedLabel'])) ? current($component['preferedLabel']) : ""),

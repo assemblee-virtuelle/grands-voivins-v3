@@ -24,6 +24,10 @@ Polymer({
             type: Array,
             value: []
         },
+        otherArray: {
+            type: Array,
+            value: []
+        },
         searchLastTerm: {
             type: String,
             value: null
@@ -183,8 +187,16 @@ Polymer({
                 results =(typeof resultTemps[this.typeSelected] !== 'undefined' )? resultTemps[Object.keys(resultTemps)[0]] : [];
             }
             else{
+                this.otherArray = [];
                 results = this.filterNonGrandVoisins(resultTemps[this.typeSelected]);
             }
+
+            if(this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+                this.set('orga', true);
+            } else {
+                this.set('orga', false);
+            }
+
             // Create title.
             let resultsTitle = '';
             // Results number.
@@ -199,9 +211,11 @@ Polymer({
         this.tabsRegistry.all && (this.tabsRegistry.all.counter = totalCounter);
         for (let entity in semapps.entities){
             this.tabsRegistry[entity] && (this.tabsRegistry[entity].counter = typesCounter[entity] || 0);
-
         }
         setTimeout(() => {
+            if(this.otherArray.length != 0){
+                this.set('otherArray', this.otherArray);
+            }
             this.set('results', results);
         }, 100);
     },
@@ -223,7 +237,6 @@ Polymer({
         let filter = document.getElementById("orgaGvFilter");
         let checkbox = document.getElementById("isGV");
 
-        
         if ($(checkbox).hasClass('checked') == true){
             isgv = true;
         } else {
@@ -231,18 +244,27 @@ Polymer({
         }
         if (this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
             filter.style.display = "initial";
-            if (isgv === true)
-            {
-                let filteredResults = [];
-                results.forEach((e) => {
-                    if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
-                    e["address"] === "72 Avenue Denfert-Rochereau 75014 Paris" ||
-                    e["address"] === "82 Avenue Denfert-Rochereau 75014 Paris"){
-                        filteredResults.push(e);
-                    }
-                })
-                results = filteredResults;
-            }
+            let filteredResults = [];
+            let gvArray = [];
+            let otherArray = [];
+
+            results.forEach((e) => {
+                if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
+                e["address"] === "72 Avenue Denfert-Rochereau 75014 Paris" ||
+                e["address"] === "82 Avenue Denfert-Rochereau 75014 Paris"){
+                    e["gv"] = true;
+                    gvArray.push(e);
+                } else {
+                    e["gv"] = false;
+                    otherArray.push(e);
+                }
+            });
+
+            if (isgv == true)
+                this.otherArray = [];
+            else
+                this.otherArray = otherArray;
+            results = gvArray;
         } else{
             filter.style.display = "none";
         }

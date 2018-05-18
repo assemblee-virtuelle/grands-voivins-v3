@@ -20,8 +20,17 @@
           <input class="checked" type="checkbox" id="isGV" checked="true" on-change="callsearch">
         </span>
         <div id="searchResults" class="col col-sm-12">
+          <template is="dom-if" if="[[orga]]">
+            <div class="list-separator">SITUÉ AUX GRANDS VOISINS</div>
+          </template>
           <template is="dom-repeat" items="{{results}}">
             <semapps-results-item data="[[item]]"></semapps-results-item>
+          </template>
+          <template is="dom-if" if="[[otherArray.length]]">
+            <div class="list-separator">AILLEURS</div>
+          </template>
+          <template is="dom-repeat" items="{{otherArray}}">
+              <semapps-results-item data="[[item]]"></semapps-results-item>
           </template>
         </div>
         <template is="dom-if" if="[[searchError]]">
@@ -51,5 +60,5 @@
     </div>
 
   </template>
-  <script src="semapps-results.min.js"></script>
+  <script src="semapps-results.js"></script>
 </dom-module>
