@@ -54,4 +54,28 @@
   }
 }
 
+#orgaGvFilter{
+  display:none;
+  padding: 5px;
+  border: 2px dashed #949494;
+}
 
+#isGV{
+  margin-bottom: 15px;
+  margin-left: 10px;
+  position: relative;
+  top: 2px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+.list-separator{
+  width:100%;
+  border-bottom: 1px dashed #949494;
+  font-weight: bold;
+  font-size: 15px;
+  color:#55555a;
+  margin-top: 10px;
+  margin-bottom:10px;
+  padding-left:55px;
+
+}

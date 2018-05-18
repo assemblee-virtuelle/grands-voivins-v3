@@ -87,7 +87,7 @@ Polymer({
       let addressLabel = data.properties.address[0];
       if(semapps.map.pins[data.uri]){
         semapps.map.pinShowOne(data.uri);
-      }
+      } 
       else{
         semapps.getAddressToCreatePoint(addressLabel,data.title,data.properties.type[0],data.uri)
       }
