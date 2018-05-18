@@ -44,7 +44,6 @@ class CartoAdminPageOrga extends CartoAdminPage {
 
                     success : function(donnee){
                         reponse($.map(donnee.features, function(objet){
-                            log(objet.properties.label)
                             return objet.properties.label; // on retourne cette forme de suggestion
 
                         }));

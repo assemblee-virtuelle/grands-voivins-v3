@@ -12,6 +12,12 @@ Polymer({
         typeSelected: {
             type: String
         },
+        resultsTitle: {
+            type: String
+        },
+        resultTitle: {
+            type: String
+        },
         tabs: {
             type: Array,
             value: []
@@ -80,7 +86,7 @@ Polymer({
             // Route change may be fired before init.
             window.SemAppsCarto.ready(() => {
                 let split = data.path.split('/');
-                log(split)
+                //log(split)
                 this.search(split[1]);
             });
         }
@@ -179,6 +185,7 @@ Polymer({
                 }
             }
             
+            this.resultsTitle = '';
             // semapps.map.pinShowAll();
             if(typeof resultTemps[this.typeSelected] === 'undefined' ){
                 // Deselect tab if current.
@@ -198,11 +205,11 @@ Polymer({
             }
 
             // Create title.
-            let resultsTitle = '';
             // Results number.
-            resultsTitle += (results.length) ? results.length + ' résultats ' : 'Aucun résultat  ';
+
             // Display title.
-            this.resultsTitle = resultsTitle;
+            //this.resultsTitle = resultsTitle;
+            this.resultsTitle += (results.length) ? results.length + ' résultats ' : 'Aucun résultat  ';
             // Display no results section or not.
             this.noResult = results.length === 0;
 
@@ -232,21 +239,24 @@ Polymer({
         }
     },
 
-    filterNonGrandVoisins(results){
+    filterNonGrandVoisins(results){ //TODO: A faire de maniere plus generique
         let isgv = true;
         let filter = document.getElementById("orgaGvFilter");
         let checkbox = document.getElementById("isGV");
 
         if ($(checkbox).hasClass('checked') == true){
             isgv = true;
+
         } else {
             isgv = false;
         }
+        this.otherArray = [];        
         if (this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
             filter.style.display = "initial";
             let filteredResults = [];
             let gvArray = [];
             let otherArray = [];
+            this.otherArray = [];
 
             results.forEach((e) => {
                 if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
@@ -260,14 +270,16 @@ Polymer({
                 }
             });
 
-            if (isgv == true)
-                this.otherArray = [];
-            else
-                this.otherArray = otherArray;
             results = gvArray;
+            if (isgv === false){
+                this.otherArray = otherArray;
+            }
+
         } else{
             filter.style.display = "none";
         }
+        this.resultsTitle += (results.length + this.otherArray.length) ? results.length + this.otherArray.length + ' résultats ' : 'Aucun résultat  ';
+        document.getElementById("resultstitle").innerHTML = this.resultsTitle; //TODO: a improve
         return results;
     }
 });

@@ -12,7 +12,6 @@
     window.SemAppsCarto = class {
 
         constructor(mainComponent) {
-            log(mainComponent);
             window.semapps = this;
             this.baseUrl = '/';
             this.myRoute = window.location.pathname.replace(/\//g, '');

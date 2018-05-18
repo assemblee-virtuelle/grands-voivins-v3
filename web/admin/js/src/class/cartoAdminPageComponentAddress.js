@@ -27,9 +27,6 @@ class CartoAdminPageComponentAddress extends CartoAdminPage {
                             let array =  r.responseJSON.features;
                             if (array.length > 0){
                                 let result = array[0];
-                                log(result);
-                                log(result.geometry.coordinates[0]);
-                                log(result.geometry.coordinates[1]);
                                 let longitude = result.geometry.coordinates[0];
                                 let latitude = result.geometry.coordinates[1];
                                 address_latitude.attr('value',latitude);

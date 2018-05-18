@@ -44,7 +44,6 @@ Polymer({
       semapps.ajax('webservice/context/change/' + encodeURI(encodeURIComponent(this.idOfGraph)), (data) => {
           "use strict";
           // Check that we are on the last callback expected.
-          log(data);
           window.location.replace(path);
       });
 
@@ -87,7 +86,7 @@ Polymer({
       let addressLabel = data.properties.address[0];
       if(semapps.map.pins[data.uri]){
         semapps.map.pinShowOne(data.uri);
-      }
+      } 
       else{
         semapps.getAddressToCreatePoint(addressLabel,data.title,data.properties.type[0],data.uri)
       }
@@ -115,7 +114,6 @@ Polymer({
     inner.parent = this;
     semapps.detail = this;
     this.currentComponentUri = data.uri;
-    log(semapps.detail.canEdit);
 
       let domInner = document.getElementById('semapps-detail-inner');
     domInner.innerHTML = '';
