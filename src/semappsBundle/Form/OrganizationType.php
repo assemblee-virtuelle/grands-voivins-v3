@@ -116,11 +116,11 @@ class OrganizationType extends SemanticFormType
 
                     'rdfType'   => semappsConfig::URI_PAIR_ORGANIZATION,
                 ]
-            )
+            )/*
             ->add(
                 $builder,
                 'offers',
-                DbPediaType::class,
+                UriType::class,
                 [
                     'required' => false,
                 ]
@@ -128,11 +128,11 @@ class OrganizationType extends SemanticFormType
             ->add(
                 $builder,
                 'needs',
-                DbPediaType::class,
+                UriType::class,
                 [
                     'required' => false,
                 ]
-            )
+            )*/
             ->add(
                 $builder,
                 'hasSubject',

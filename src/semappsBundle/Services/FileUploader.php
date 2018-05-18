@@ -45,6 +45,6 @@ class FileUploader
     }
 
     public function generateUrlForFile($fileName){
-        return 'http://'.$this->domaine.'/uploads/pictures/'.$fileName;
+        return '/uploads/pictures/'.$fileName;
     }
 }

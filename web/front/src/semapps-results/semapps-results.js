@@ -24,6 +24,10 @@ Polymer({
             type: Array,
             value: []
         },
+        otherArray: {
+            type: Array,
+            value: []
+        },
         searchLastTerm: {
             type: String,
             value: null
@@ -80,6 +84,12 @@ Polymer({
                 this.search(split[1]);
             });
         }
+    },
+
+    callsearch(ev){
+        let checkbox = $(document.getElementById("isGV"));
+        checkbox.toggleClass('checked');
+        this.searchRender();
     },
 
     search(term, building) {
@@ -154,7 +164,6 @@ Polymer({
                     typesCounter[result.type] = typesCounter[result.type] || 0;
                     typesCounter[result.type]++;
                     totalCounter++;
-
                     if (typeof resultTemps[result.type] === 'undefined')
                         resultTemps[result.type] = [];
                     resultTemps[result.type].push(result);
@@ -169,7 +178,7 @@ Polymer({
                     }
                 }
             }
-
+            
             // semapps.map.pinShowAll();
             if(typeof resultTemps[this.typeSelected] === 'undefined' ){
                 // Deselect tab if current.
@@ -178,16 +187,22 @@ Polymer({
                 results =(typeof resultTemps[this.typeSelected] !== 'undefined' )? resultTemps[Object.keys(resultTemps)[0]] : [];
             }
             else{
-                results = resultTemps[this.typeSelected];
+                this.otherArray = [];
+                results = this.filterNonGrandVoisins(resultTemps[this.typeSelected]);
             }
+
+            if(this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+                this.set('orga', true);
+            } else {
+                this.set('orga', false);
+            }
+
             // Create title.
             let resultsTitle = '';
             // Results number.
             resultsTitle += (results.length) ? results.length + ' résultats ' : 'Aucun résultat  ';
-            // Building.
             // Display title.
             this.resultsTitle = resultsTitle;
-
             // Display no results section or not.
             this.noResult = results.length === 0;
 
@@ -196,9 +211,11 @@ Polymer({
         this.tabsRegistry.all && (this.tabsRegistry.all.counter = totalCounter);
         for (let entity in semapps.entities){
             this.tabsRegistry[entity] && (this.tabsRegistry[entity].counter = typesCounter[entity] || 0);
-
         }
         setTimeout(() => {
+            if(this.otherArray.length != 0){
+                this.set('otherArray', this.otherArray);
+            }
             this.set('results', results);
         }, 100);
     },
@@ -213,5 +230,44 @@ Polymer({
         if (this.tabsRegistry[val]) {
             this.tabsRegistry[val].$$('li').classList.add('active');
         }
+    },
+
+    filterNonGrandVoisins(results){
+        let isgv = true;
+        let filter = document.getElementById("orgaGvFilter");
+        let checkbox = document.getElementById("isGV");
+
+        if ($(checkbox).hasClass('checked') == true){
+            isgv = true;
+        } else {
+            isgv = false;
+        }
+        if (this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+            filter.style.display = "initial";
+            let filteredResults = [];
+            let gvArray = [];
+            let otherArray = [];
+
+            results.forEach((e) => {
+                if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
+                e["address"] === "72 Avenue Denfert-Rochereau 75014 Paris" ||
+                e["address"] === "82 Avenue Denfert-Rochereau 75014 Paris"){
+                    e["gv"] = true;
+                    gvArray.push(e);
+                } else {
+                    e["gv"] = false;
+                    otherArray.push(e);
+                }
+            });
+
+            if (isgv == true)
+                this.otherArray = [];
+            else
+                this.otherArray = otherArray;
+            results = gvArray;
+        } else{
+            filter.style.display = "none";
+        }
+        return results;
     }
 });

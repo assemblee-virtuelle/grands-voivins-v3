@@ -67,7 +67,12 @@ Polymer({
                 icon: 'folder-open',
                 markerColor: 'black'
             }),
+            "http://virtual-assembly.org/pair#Good":L.AwesomeMarkers.icon({
+                icon: 'shop',
+                markerColor: 'black'
+            }),
         }
+        hider();
 
     },
 
@@ -202,4 +207,26 @@ function getDetail(elem) {
     semapps.goToPath('detail', {
         uri: window.encodeURIComponent(elem.rel)
     });
+}
+
+function hider(){
+    var hiderBlock = document.getElementById("hider_block")
+    hiderBlock.addEventListener("click", function(e){
+        let map = document.querySelector(".mapContent");
+        let jqueryhider = $(hiderBlock);
+        let hidertext = document.getElementById("hider_text");
+        let ishiding = jqueryhider.hasClass("shown");
+
+        if (ishiding){
+            jqueryhider.removeClass("shown");
+            jqueryhider.addClass("notshown");            
+            hidertext.innerText = "Afficher la carte";
+            $(map).hide();
+        } else{
+            jqueryhider.addClass("shown");
+            jqueryhider.removeClass("notshown");            
+            hidertext.innerText = "Cacher la carte";            
+            $(map).show();
+        }
+    })
 }

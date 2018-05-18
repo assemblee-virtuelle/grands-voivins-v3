@@ -12,15 +12,17 @@ imports:
     - { resource: "@semappsBundle/Resources/config/SemanticForms/organizationtypeConf.yml" }
     - { resource: "@semappsBundle/Resources/config/SemanticForms/dbpedia.yml" }
     - { resource: "@semappsBundle/Resources/config/SemanticForms/thematicConf.yml" }
+    - { resource: "@semappsBundle/Resources/config/SemanticForms/goodConf.yml" }
 
 parameters:
   typeToName:
-    http://virtual-assembly.org/pair#Person: 'person'
     http://virtual-assembly.org/pair#Organization: 'organization'
+    http://virtual-assembly.org/pair#Person: 'person'
     http://virtual-assembly.org/pair#Project: 'project'
     http://virtual-assembly.org/pair#Event: 'event'
     http://virtual-assembly.org/pair#Proposal: 'proposal'
     http://virtual-assembly.org/pair#Document: 'document'
+    http://virtual-assembly.org/pair#Good: 'good'    
 
   graphToName:
     urn://semapps/thesaurus/documenttype: 'documentType'

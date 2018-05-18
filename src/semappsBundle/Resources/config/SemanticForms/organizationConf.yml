@@ -88,11 +88,11 @@ parameters:
         http://virtual-assembly.org/pair#offers:
           value: 'offers'
           access: 'anonymous'
-          type: 'dbpedia'
+          type: 'uri'
         http://virtual-assembly.org/pair#needs:
           value: 'needs'
           access: 'anonymous'
-          type: 'dbpedia'
+          type: 'uri'
         http://virtual-assembly.org/pair#brainstorms:
           value: 'brainstorms'
           access: 'anonymous'
@@ -122,6 +122,10 @@ parameters:
            access: 'anonymous'
            type: 'uri'
         http://virtual-assembly.org/pair#hasType:
+           value: 'hasType'
+           access: 'anonymous'
+           type: 'uri'
+        http://virtual-assembly.org/pair#Good:
            value: 'hasType'
            access: 'anonymous'
            type: 'uri'

@@ -20,20 +20,18 @@
             this.$window = $(window);
             this.detailAddress= [];
             this.entities = {
-                "http://virtual-assembly.org/pair#Person":{
-                    name: 'Personne',
-                    plural: 'Personnes',
-                    icon: 'user',
-                    markerColor: '#28ccfb',
-                }
-                ,
                 "http://virtual-assembly.org/pair#Organization":{
                     name: 'Organisation',
                     plural: 'Organisations',
                     icon: 'tower',
                     markerColor: '#01acdd',
-                }
-                ,
+                },
+                "http://virtual-assembly.org/pair#Person":{
+                    name: 'Personne',
+                    plural: 'Personnes',
+                    icon: 'user',
+                    markerColor: '#28ccfb',
+                },
                 "http://virtual-assembly.org/pair#Project":{
                     name: 'Projet',
                     plural: 'Projets',
@@ -59,6 +57,13 @@
                     name: 'Document',
                     plural: 'Documents',
                     icon: 'folder-open',
+                    markerColor: '#a4de37',
+                }
+                ,
+                "http://virtual-assembly.org/pair#Good":{
+                    name: 'Good',
+                    plural: 'Goods',
+                    icon: 'gift',
                     markerColor: '#a4de37',
                 }
                 ,
@@ -239,8 +244,12 @@
             if (!path) {
                 if(semapps.entities.hasOwnProperty(key))
                     return '/common/images/result-no_picture-' + semapps.entities[key].nameType + '.png';
+                else
+                    return null;
+            } else if (path.indexOf("http")) {
+                return path;
             }
-            return path;
+            return window.location.host + path;
         }
         haveName(){
             return this.user.name !== '';
