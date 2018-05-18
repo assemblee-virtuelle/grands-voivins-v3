@@ -16,7 +16,6 @@ class CartoAdminPageComponent extends CartoAdminPage {
         });
         $('.component-new-picture').change((e) => {
             e.preventDefault();
-            log($(e.currentTarget).val());
             $("img[id='componentPicture']").attr('src',$(e.currentTarget).val());
         });
         $("a[id='componentPicture']").mouseover((e) => {

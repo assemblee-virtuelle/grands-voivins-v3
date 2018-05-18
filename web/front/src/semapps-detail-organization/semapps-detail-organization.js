@@ -11,7 +11,6 @@ Polymer({
     SemAppsCarto.ready(() => {
       semapps.initElementGlobals(this);
     });
-    log(this.data);
     // Raw values.
     $.extend(this, this.data.properties);
     this.hasResponsible = this.data.hasResponsible;
@@ -43,7 +42,6 @@ Polymer({
     },
     handleClickRessource(e) {
         e.preventDefault();
-        log('test');
         semapps.goToPath('ressource', {
             uri: window.encodeURIComponent(e.currentTarget.getAttribute('rel')),
             person: window.encodeURIComponent(this.uri)
