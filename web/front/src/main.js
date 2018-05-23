@@ -66,6 +66,13 @@
                     markerColor: '#a4de37',
                 }
                 ,
+                "http://virtual-assembly.org/pair#Service":{
+                    name: 'Service',
+                    plural: 'Services',
+                    icon: 'wrench',
+                    markerColor: '#a4de37',
+                }
+                ,
                 "urn://semapps/thesaurus/documenttype":{
                     name: 'Type de document',
                     plural: 'Types de document',
