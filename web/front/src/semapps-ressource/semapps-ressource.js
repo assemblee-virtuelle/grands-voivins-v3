@@ -55,6 +55,7 @@ Polymer({
         this.skill = data.skill;
         this.title = data.name;
         this.detail = data.detail;
+        console.log(data);
         var myObjSubject = this.detail.subject;
         var myObjWikipage = this.detail.wikipage;
         this.subject = Object.keys(myObjSubject).map(function (key) { return {'uri': key, 'label' :myObjSubject[key] }; });
