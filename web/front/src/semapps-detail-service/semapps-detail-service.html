@@ -29,6 +29,18 @@
                   </td>
                 </tr>
               </template>
+              <template is="dom-if" if="[[email]]">
+                <tr class="field">
+                  <td class="fieldLabel">E-mail</td>
+                  <td>[[email]]</td>
+                </tr>
+              </template>
+              <template is="dom-if" if="[[phone]]">
+                <tr class="field">
+                  <td class="fieldLabel">Téléphone</td>
+                  <td>[[phone]]</td>
+                </tr>
+              </template>
               <template is="dom-if" if="[[allowUri]]">
                 <template is="dom-if" if="[[data.uri]]">
                   <tr class="field">
@@ -79,6 +91,49 @@
           </div>
         </template>
       </div>
+      <div class="col col-sm-4 side-blocks">
+        <template is="dom-if" if="[[data.offeredBy.person.length]]">
+          <h3>Offert par ( personne )</h3>
+          <div class="thumbs">
+            <template is="dom-repeat" items="{{data.offeredBy.person}}">
+              <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                              label="[[item.name]]"></semapps-avatar>
+            </template>
+          </div>
+          <div class="clearfix"></div>
+        </template>
+        <template is="dom-if" if="[[data.offeredBy.organization.length]]">
+          <h3>Offert par ( organisation )</h3>
+          <div class="thumbs">
+            <template is="dom-repeat" items="{{data.offeredBy.organization}}">
+              <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                              label="[[item.name]]"></semapps-avatar>
+            </template>
+          </div>
+          <div class="clearfix"></div>
+        </template>
+        <template is="dom-if" if="[[data.neededBy.person.length]]">
+          <h3>Demandé par ( personne )</h3>
+          <div class="thumbs">
+            <template is="dom-repeat" items="{{data.neededBy.person}}">
+              <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                              label="[[item.name]]"></semapps-avatar>
+            </template>
+          </div>
+          <div class="clearfix"></div>
+        </template>
+        <template is="dom-if" if="[[data.neededBy.organization.length]]">
+          <h3>Demandé par ( organisation )</h3>
+          <div class="thumbs">
+            <template is="dom-repeat" items="{{data.neededBy.organization}}">
+              <semapps-avatar image="[[item.image]]" uri="[[item.uri]]"
+                              label="[[item.name]]"></semapps-avatar>
+            </template>
+          </div>
+          <div class="clearfix"></div>
+        </template>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </template>
   <script src="semapps-detail-service.js"></script>

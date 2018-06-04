@@ -4,6 +4,7 @@ namespace semappsBundle\Form;
 
 use semappsBundle\Form\Type\YesNoType;
 use semappsBundle\semappsConfig;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -68,6 +69,22 @@ class ServiceType extends SemanticFormType
                 AdresseType::class,
                 [
                     'required'  => false,
+                ]
+            )
+            ->add(
+                $builder,
+                'email',
+                EmailType::class,
+                [
+                    'required' => false,
+                ]
+            )
+            ->add(
+                $builder,
+                'phone',
+                TextType::class,
+                [
+                    'required' => false,
                 ]
             )
             ->add(

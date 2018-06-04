@@ -29,6 +29,18 @@
                   </td>
                 </tr>
               </template>
+              <template is="dom-if" if="[[email]]">
+                <tr class="field">
+                  <td class="fieldLabel">E-mail</td>
+                  <td>[[email]]</td>
+                </tr>
+              </template>
+              <template is="dom-if" if="[[phone]]">
+                <tr class="field">
+                  <td class="fieldLabel">Téléphone</td>
+                  <td>[[phone]]</td>
+                </tr>
+              </template>
               <template is="dom-if" if="[[allowUri]]">
                 <template is="dom-if" if="[[data.uri]]">
                   <tr class="field">
