@@ -64,7 +64,7 @@ class OrganizationController extends AbstractMultipleComponentController
                     $actualImageName = $newPictureName;
                     $this->addFlash(
                         'success',
-                        'Votre image a bien été changée.'
+                        $this->get('translator')->trans("organization.update.picture",[],"controller")
                     );
                 }
 
@@ -77,7 +77,7 @@ class OrganizationController extends AbstractMultipleComponentController
             if(!$newPictureName)
                 $this->addFlash(
                     'success',
-                    'Le contenu a bien été mis à jour.'
+                    $this->get('translator')->trans("organization.update.success",[],"controller")
                 );
 
             return $this->redirectToRoute('orgaComponentForm',['uniqueComponentName' => $componentName, 'id' =>urlencode($form->uri)]);
@@ -110,14 +110,14 @@ class OrganizationController extends AbstractMultipleComponentController
                     //dump($dataToSave);exit;
                     if(is_null($dataToSave)){
                         $this->setSfLink(null);
-                        $this->addFlash("info","L'URI renseignée ne renvoie aucune donnée");
+                        $this->addFlash("info", $this->get('translator')->trans("organization.uri.no_data",[],"controller"));
 
                     }elseif(!$dataToSave){
                         $this->setSfLink(null);
-                        $this->addFlash("info","L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné");
+                        $this->addFlash("info", $this->get('translator')->trans("organization.uri.no_corresp",[],"controller"));
 
                     }else{
-                        $this->addFlash("success","Le profil organisation a été importé avec succès !");
+                        $this->addFlash("success", $this->get('translator')->trans("organization.uri.success",[],"controller"));
                         if(array_key_exists('hasResponsible',$dataToSave)){
                             $hasResponsible = json_decode($dataToSave['hasResponsible'],JSON_OBJECT_AS_ARRAY);
                             $hasResponsible[$this->getUser()->getSfLink()] = 0;
@@ -132,7 +132,7 @@ class OrganizationController extends AbstractMultipleComponentController
                         return $this->redirectToRoute('orgaComponentForm',['uniqueComponentName' => $componentName, 'id' => urlencode($uri)]);
                     }
                 }else{
-                    $this->addFlash("info","L'URI existe déjà");
+                    $this->addFlash("info", $this->get('translator')->trans("organization.uri.already_exist",[],"controller"));
                 }
             }
         }
@@ -158,9 +158,9 @@ class OrganizationController extends AbstractMultipleComponentController
             $type = array_merge([$componentConf['type']],array_key_exists('otherType',$componentConf)? $componentConf['otherType'] : []);
             $dataToSave = $importManager->contentToImport($uri,$componentConf,$type);
             $testForm->submit($dataToSave,false);
-            $this->addFlash('success','Actualisation ok !');
+            $this->addFlash('success', $this->get('translator')->trans("organization.reload.success",[],"controller"));
         }else{
-            $this->addFlash('info',"Problème lors de l'actualisation !");
+            $this->addFlash('info', $this->get('translator')->trans("organization.reload.problem",[],"controller"));
         }
         return $this->redirectToRoute('orgaComponentForm',["uniqueComponentName" => $uniqueComponentName,"id" => urlencode($uri)]);
     }

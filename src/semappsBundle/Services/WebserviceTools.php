@@ -63,6 +63,7 @@ class WebserviceTools
         $typeProposition= array_key_exists(semappsConfig::URI_PAIR_PROPOSAL,$arrayType);
         $typeGood = array_key_exists(semappsConfig::URI_PAIR_GOOD,$arrayType);
         $typeService = array_key_exists(semappsConfig::URI_PAIR_SERVICE,$arrayType);
+        $typePlace = array_key_exists(semappsConfig::URI_PAIR_PLACE,$arrayType);
         $typeThesaurus= array_key_exists(semappsConfig::URI_SKOS_THESAURUS,$arrayType);
         $sparqlClient = new SparqlClient();
         /** @var \VirtualAssembly\SparqlBundle\Sparql\sparqlSelect $sparql */
@@ -199,6 +200,18 @@ class WebserviceTools
             $results = $this->sfClient->sparql($goodSparql->getQuery());
             $services= $this->sfClient->sparqlResultsValues($results,'uri');
         }
+        $places = [];
+        if((($type == semappsConfig::Multiple || $typePlace) ) ){
+            $placeSparql = clone $sparql;
+            $placeSparql->addSelect('?title')
+                ->addWhere('?uri','rdf:type', $sparql->formatValue(semappsConfig::URI_PAIR_PLACE,$sparql::VALUE_TYPE_URL),'?GR')
+                ->addWhere('?uri','pair:preferedLabel','?title','?GR')
+                ->addOptional('?uri','pair:comment','?desc','?GR');
+            //$placeSparql->addOptional('?uri','pair:building','?building','?GR');
+            if($term)$placeSparql->addFilter('contains( lcase(?title)  , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) || contains( lcase(?address) , lcase("'.$term.'"))');
+            $results = $this->sfClient->sparql($placeSparql->getQuery());
+            $places= $this->sfClient->sparqlResultsValues($results,'uri');
+        }
         $thematiques = [];
         if($type == semappsConfig::Multiple || $typeThesaurus ){
             $thematiqueSparql = clone $sparql;
@@ -210,7 +223,7 @@ class WebserviceTools
             $thematiques = $this->sfClient->sparqlResultsValues($results,'uri');
         }
 
-        $results = array_merge($organizations,$persons,$projects,$events,$propositions,$thematiques,$documents,$goods, $services);
+        $results = array_merge($organizations,$persons,$projects,$events,$propositions,$thematiques,$documents,$goods,$services,$places);
         return $results;
     }
 
@@ -238,6 +251,7 @@ class WebserviceTools
             case semappsConfig::URI_PAIR_DOCUMENT :
             case semappsConfig::URI_PAIR_GOOD :
             case semappsConfig::URI_PAIR_SERVICE :
+            case semappsConfig::URI_PAIR_PLACE :
                 $sparql->addSelect('?label')
                     ->addWhere('?uri','pair:preferedLabel','?label','?gr');
 
@@ -360,6 +374,9 @@ class WebserviceTools
             case semappsConfig::URI_PAIR_SERVICE:
                 $output['title'] = current($properties['preferedLabel']);
                 break;
+            case semappsConfig::URI_PAIR_PLACE:
+                $output['title'] = current($properties['preferedLabel']);
+                break;
             case semappsConfig::URI_SKOS_CONCEPT:
                 $output['title'] = current($properties['preferedLabel']);
                 break;
@@ -434,6 +451,7 @@ class WebserviceTools
                                     case semappsConfig::URI_PAIR_DOCUMENT:
                                     case semappsConfig::URI_PAIR_GOOD:
                                     case semappsConfig::URI_PAIR_SERVICE:
+                                    case semappsConfig::URI_PAIR_PLACE:
                                         $result = [
                                             'uri' => $uri,
                                             'name' => ((current($component['preferedLabel'])) ? current($component['preferedLabel']) : ""),

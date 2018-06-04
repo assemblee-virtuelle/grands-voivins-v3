@@ -1,0 +1,77 @@
+person:
+    uri:
+        no_data: "L'URI renseignée ne renvoie aucune donnée"
+        no_corresp: "L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné"
+        success: "Votre profil a été importé avec succès !"
+        already_exist: "L'URI existe déjà"
+    update:
+        success: "Votre profil a bien été mis à jour."
+        picture: "Votre image a bien été changée."
+    reload:
+        success: "Actualisation ok !"
+        problem: "Problème lors de l'actualisation !"
+    delete:
+        success: "Le profil de l'utilisateur a été supprimé avec succès"
+        problem: "Problème lors de la suppression du profil"
+        no_uri: "L'utilisateur courant n'a pas d'URI"
+
+admin:
+    register:
+        must_dc: "Vous devez vous déconnecter avant d'accéder à cette page"
+        no_token: "Token non reconnu"
+        already_exist: "L'utilisateur saisi existe déjà, vous pouvez essayer de réinitialiser votre mot de passe en renseignant votre e-mail ou votre login"
+        success: "Votre compte est maintenant créé, vous pouvez vous connecter et commencer à remplir votre profil !"
+    setting:
+        wrong_pass: "Les mots de passe saisis ne correspondent pas"
+        data_save: "Les informations ont été correctement enregistrées"
+        user_exist: "Le nom d'utilisateur saisi existe déjà"
+        current_worng_pass: "Le mot de passe courant saisi est incorrect"
+    context:
+        success: "Le contexte a bien été changé"
+    invitation:
+        send: "Envoyer une invitation"
+        email_exist: "L'email existe déjà"
+        sended: "Email envoyé à l'adresse %email% !"
+        invited: "[%website%] Vous avez reçu une invitation à rejoindre la cartographie"
+        get_invited: "Bonjour %email% !<br><br>
+                      Ton voisin %email2% t’invite à te créer un compte sur la cartographie %website% !<br><br>
+                      Pour t’inscrire sur cette plateforme, il faut <a href='%url%'>cliquer ici</a> <br>
+                      Si cela ne fonctionne pas, il suffit de copier-coller ce lien dans un navigateur : <br>%url%<br><br>
+                      <br>
+                      A très bientôt :-)"
+
+admin_user:
+    user_exist: "L'utilisateur saisi existe déjà"
+    delete:
+        success: "Utilisateur supprimé !"
+        problem: "Problème lors de la suppression"
+    sended: "Email envoyé pour l'utilisateur %user% à l'adresse %email%"
+
+component:
+    update:
+        picture: "L'image a été rajoutée avec succès"
+        success: "Le contenu a bien été mis à jour."
+    uri:
+        no_data: "L'URI renseignée ne renvoie aucune donnée"
+        no_corresp: "L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné"
+        success: "Votre profil a été importé avec succès !"
+        already_exist: "L'URI existe déjà"
+    reload:
+        success: "Actualisation ok !"
+        problem: "Problème lors de l'actualisation !"
+
+organization:
+    update:
+        picture: "L'image a été rajoutée avec succès"
+        success: "Le contenu a bien été mis à jour."
+    uri:
+        no_data: "L'URI renseignée ne renvoie aucune donnée"
+        no_corresp: "L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné"
+        success: "Le profil a été importé avec succès !"
+        already_exist: "L'URI existe déjà"
+    reload:
+        success: "Actualisation ok !"
+        problem: "Problème lors de l'actualisation !"
+
+thesaurus:
+    update: "Le contenu à bien été mis à jour."

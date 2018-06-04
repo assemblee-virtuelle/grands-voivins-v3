@@ -1,0 +1,5 @@
+person:
+    uri:
+        no_data: 'The filled URI does not return any data'
+        no_coresp: 'The filled URI does not match the type of entity you selected'
+        success: 'Your profile has been successfully imported !'

@@ -15,4 +15,4 @@ services:
 
     semapps_bundle.event_listener.send_mail:
         class: semappsBundle\Services\Mailer
-        arguments: ["@swiftmailer.mailer.default.transport.real", "%mailer_user%","@templating",'@semapps_bundle.encryption',"%carto.domain%"]
+        arguments: ["@swiftmailer.mailer.default.transport.real", "%mailer_user%","@templating",'@semapps_bundle.encryption',"%carto.domain%", "@translator.default"]

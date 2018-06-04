@@ -21,7 +21,7 @@ class ThesaurusController extends AbstractMultipleComponentController
         $form 				= $this->getSfForm($sfClient,$componentName, $request);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Le contenu à bien été mis à jour.');
+            $this->addFlash('success', $this->get('translator')->trans("thesaurus.update",[],"controller"));
             return $this->redirectToRoute(
                 'componentList', ["componentName" => $componentName]
             );

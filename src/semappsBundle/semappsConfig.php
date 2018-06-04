@@ -21,9 +21,16 @@ class semappsConfig
     const URI_SKOS_CONCEPT = 'http://www.w3.org/2004/02/skos/core#Concept';
     const URI_PAIR_GOOD = 'http://virtual-assembly.org/pair#Good';
     const URI_PAIR_SERVICE = 'http://virtual-assembly.org/pair#Service';
+    const URI_PAIR_PLACE = 'http://virtual-assembly.org/pair#Place';
     const URI_MIXTE_PERSON_ORGANIZATION = [
         self::URI_PAIR_PERSON,
         self::URI_PAIR_ORGANIZATION,
+    ];
+    const URI_MIXTE_PROJECT = [
+        self::URI_PAIR_GOOD,
+        self::URI_PAIR_SERVICE,
+        self::URI_PAIR_EVENT,
+        self::URI_PAIR_PLACE
     ];
     const URI_ALL_PAIR_EXCEPT_DOC_TYPE = [
         self::URI_PAIR_PERSON,
@@ -32,8 +39,9 @@ class semappsConfig
         self::URI_PAIR_EVENT,
         self::URI_PAIR_PROPOSAL,
         self::URI_PAIR_DOCUMENT,
-        self::URI_PAIR_GOOD
-
+        self::URI_PAIR_GOOD,
+        self::URI_PAIR_SERVICE,
+        self::URI_PAIR_PLACE
     ];
     //thesaurus
     const URI_SKOS_THESAURUS = 'http://www.w3.org/2004/02/skos/core#Concept';
