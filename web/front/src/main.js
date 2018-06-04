@@ -73,6 +73,13 @@
                     markerColor: '#a4de37',
                 }
                 ,
+                "http://virtual-assembly.org/pair#Place":{
+                    name: 'Place',
+                    plural: 'Places',
+                    icon: 'map-marker',
+                    markerColor: '#a4de37',
+                }
+                ,
                 "urn://semapps/thesaurus/documenttype":{
                     name: 'Type de document',
                     plural: 'Types de document',

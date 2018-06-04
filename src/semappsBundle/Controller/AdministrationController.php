@@ -22,14 +22,14 @@ class AdministrationController extends Controller
 
 
         if($this->getUser()) {
-            $this->addFlash('info', "Vous devez vous déconnecter avant d'accéder à cette page");
+            $this->addFlash('info', $this->get('translator')->trans("admin.register.must_dc",[],"controller"));
             return $this->redirectToRoute("home");
         }
 
         // voter pour le token
         $email = $inviteManager->verifyInvite($token);
         if(!$email){
-            $this->addFlash('info', "Token non reconnu");
+            $this->addFlash('info', $this->get('translator')->trans("admin.register.no_token",[],"controller"));
             return $this->redirectToRoute("fos_user_security_login");
         }
         //get the form
@@ -61,11 +61,11 @@ class AdministrationController extends Controller
             try {
                 $em->flush();
             } catch (UniqueConstraintViolationException $e) {
-                $this->addFlash('danger', "L'utilisateur saisi existe déjà, vous pouvez essayer de réinitialiser votre mot de passe en renseignant votre e-mail ou votre login");
+                $this->addFlash('danger', $this->get('translator')->trans("admin.register.already_exist",[],"controller"));
 
                 return $this->redirectToRoute('fos_user_resetting_request',array('email' => $newUser->getEmail()));
             }
-            $this->addFlash('success', 'Votre compte est maintenant créé, vous pouvez vous connecter et commencer à remplir votre profil !');
+            $this->addFlash('success', $this->get('translator')->trans("admin.register.success",[],"controller"));
 
 
             return $this->redirectToRoute('fos_user_security_login');
@@ -120,7 +120,7 @@ class AdministrationController extends Controller
                     } else {
                         $this->addFlash(
                             'info',
-                            "Les mots de passe saisis ne correspondent pas"
+                            $this->get('translator')->trans("admin.setting.wrong_pass",[],"controller")
                         );
                     }
                 }
@@ -130,14 +130,14 @@ class AdministrationController extends Controller
                         $em->flush();
                         $this->addFlash(
                             "success",
-                            "Les informations ont été correctement enregistrées"
+                            $this->get('translator')->trans("admin.setting.data_save",[],"controller")
                         );
                     }
 
                 } catch (UniqueConstraintViolationException $e) {
                     $this->addFlash(
                         'danger',
-                        "Le nom d'utilisateur saisi existe déjà"
+                        $this->get('translator')->trans("admin.setting.user_exist",[],"controller")
                     );
 
                     return $this->redirectToRoute('settings');
@@ -145,7 +145,7 @@ class AdministrationController extends Controller
             } else {
                 $this->addFlash(
                     'info',
-                    "Le mot de passe courant saisi est incorrect"
+                    $this->get('translator')->trans("admin.setting.current_wrong_pass",[],"controller")
                 );
             }
         }
@@ -162,14 +162,14 @@ class AdministrationController extends Controller
     public function changeContextAction($context =null){
         $contextManager = $this->get('semapps_bundle.context_manager');
         $contextManager->setContext($this->getUser()->getSfLink(),urldecode($context));
-        $this->addFlash('success',"Le contexte a bien été changé");
+        $this->addFlash('success', $this->get('translator')->trans("admin.context.success",[],"controller"));
         return $this->redirectToRoute('personComponentFormWithoutId',['uniqueComponentName' =>'person']);
     }
 
     public function inviteAction(Request $request){
         $form = $this->createFormBuilder(null)
             ->add('email', EmailType::class)
-            ->add('submit', SubmitType::class, array('label' => 'Envoyer une invitation'))
+            ->add('submit', SubmitType::class, array('label' => $this->get('translator')->trans("admin.invitation.send",[],"controller")))
             ->getForm();
         $form->handleRequest($request);
 
@@ -186,7 +186,7 @@ class AdministrationController extends Controller
 
             $user = $userRepository->findOneBy(['email' => $email]);
             if ($user){
-                $this->addFlash("info","L'email existe déjà");
+                $this->addFlash("info", $this->get('translator')->trans("admin.invitation.email_exist",[],"controller"));
                 return $this->redirectToRoute('invite');
             }
 
@@ -194,7 +194,7 @@ class AdministrationController extends Controller
 
             $this->sendEmailInvitation($email,$token);
 
-            $this->addFlash('success', "Email envoyé à l'adresse <b>" . $email . "</b> !");
+            $this->addFlash('success', $this->get('translator')->trans("admin.invitation.sended",["email" => $email],"controller"));
         }
         return $this->render(
             'semappsBundle:Admin:invite.html.twig',
@@ -206,7 +206,7 @@ class AdministrationController extends Controller
 
     public function sendInviteAction($email,$token){
         $this->sendEmailInvitation($email,$token);
-        $this->addFlash('success', "Email envoyé à l'adresse <b>" . $email . "</b> !");
+        $this->addFlash('success', $this->get('translator')->trans("admin.invitation.sended",["email" => $email],"controller"));
         return $this->redirectToRoute('userList');
     }
 
@@ -221,14 +221,8 @@ class AdministrationController extends Controller
         $mailer = $this->get('semapps_bundle.event_listener.send_mail');
         $website = $this->getParameter('carto.domain');
         $url = "http://".$website.'/register/'.$token;
-        $sujet = "[".$website."] Vous avez reçu une invitation à rejoindre la cartographie";
-        $content= "
-        Bonjour ".$email." !<br><br> 
-                        Ton voisin ".$this->getUser()->getEmail(). " t’invite à te créer un compte sur la cartographie ".$website." !<br><br>
-                        Pour t’inscrire sur cette plateforme, il faut <a href='".$url."'>cliquer ici</a> <br>
-                        Si cela ne fonctionne pas, il suffit de copier-coller ce lien dans un navigateur : <br>".$url."<br><br>
-                        <br>
-                        A très bientôt :-)";
+        $sujet = $this->get('translator')->trans("admin.invitation.invited",["website" => $website],"controller");
+        $content= $this->get('translator')->trans("admin.invitation.get_invited",["email" => $email, "email2" => $this->getUser()->getEmail(), "website" => $website, "url" => $url],"controller");
         $mailer->sendMessage($email,$sujet,$content);
     }
 }

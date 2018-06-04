@@ -56,7 +56,7 @@ class ComponentController extends AbstractMultipleComponentController
                     }
                     $newPictureName = $fileUploader->upload($newPicture);
                     $sparqlRepository->changeImage($graphURI,$form->uri,$fileUploader->generateUrlForFile($newPictureName));
-                    $this->addFlash('success', "L'image a été rajoutée avec succès");
+                    $this->addFlash('success', $this->get('translator')->trans("component.update.picture",[],"controller"));
                     return $this->redirectToRoute(
                         'componentForm', ["componentName" => $componentName, "uri" => $form->uri]
                     );
@@ -68,7 +68,7 @@ class ComponentController extends AbstractMultipleComponentController
                 $sparql->addInsert('<'.$form->uri.'>','<'.$componentConf["access"]['write'].'>','<'.$this->getUser()->getSfLink().'>','<'.$graphURI.'>');
                 $sfClient->update($sparql->getQuery());
             }
-            $this->addFlash('success', 'Le contenu a bien été mis à jour.');
+            $this->addFlash('success', $this->get('translator')->trans("component.update.success",[],"controller"));
             return $this->redirectToRoute(
                 'componentList', ["componentName" => $componentName]
             );
@@ -98,20 +98,20 @@ class ComponentController extends AbstractMultipleComponentController
                     //dump($dataToSave);exit;
                     if(is_null($dataToSave)){
                         $this->setSfLink(null);
-                        $this->addFlash("info","L'URI renseignée ne renvoie aucune donnée");
+                        $this->addFlash("info", $this->get('translator')->trans("component.uri.no_data",[],"controller"));
 
                     }elseif(!$dataToSave){
                         $this->setSfLink(null);
-                        $this->addFlash("info","L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné");
+                        $this->addFlash("info", $this->get('translator')->trans("component.uri.no_corresp",[],"controller"));
 
                     }else{
-                        $this->addFlash("success","Le profil a été importé avec succès !");
+                        $this->addFlash("success", $this->get('translator')->trans("component.uri.success",[],"controller"));
 //                        dump($dataToSave);exit;
                         $testForm->submit($dataToSave);
                         return $this->redirectToRoute('componentForm', ["componentName" => $componentName, "uri" => urlencode($uri)]);
                     }
                 }else{
-                    $this->addFlash("info","L'URI existe déjà");
+                    $this->addFlash("info", $this->get('translator')->trans("component.uri.already_exist",[],"controller"));
                 }
             }
         }
@@ -140,9 +140,9 @@ class ComponentController extends AbstractMultipleComponentController
             $type = array_merge([$componentConf['type']],array_key_exists('otherType',$componentConf)? $componentConf['otherType'] : []);
             $dataToSave = $importManager->contentToImport($uri,$componentConf,$type);
             $testForm->submit($dataToSave,false);
-            $this->addFlash('success','Actualisation ok !');
+            $this->addFlash('success', $this->get('translator')->trans("component.reload.success",[],"controller"));
         }else{
-            $this->addFlash('info',"Problème lors de l'actualisation !");
+            $this->addFlash('info', $this->get('translator')->trans("component.reload.problem",[],"controller"));
         }
         return $this->redirectToRoute('componentFormWithUri',["componentName" => $componentName,"uri" => urlencode($uri)]);
     }

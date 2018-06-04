@@ -58,7 +58,7 @@ class AdministrationUserController extends Controller
             try {
                 $em->flush();
             } catch (UniqueConstraintViolationException $e) {
-                $this->addFlash('danger', "L'utilisateur saisi existe déjà");
+                $this->addFlash('danger', $this->get('translator')->trans("admin_user.user_exist",[],"controller"));
 
                 return $this->redirectToRoute('userList');
             }
@@ -129,7 +129,7 @@ class AdministrationUserController extends Controller
         );
 
         if ($result) {
-            $this->addFlash('info', "Email envoyé pour l'utilisateur <b>" . $user->getUsername() . "</b> à l'adresse <b>" . $user->getEmail() . "</b>");
+            $this->addFlash('info', $this->get('translator')->trans("admin_user.sended",["user" => $user->getUsername(), "email" => $user->getEmail()],"controller"));
         }
         return $this->redirectToRoute($nameRoute);
     }
@@ -161,9 +161,9 @@ class AdministrationUserController extends Controller
         $em->remove($user);
         try{
             $em->flush();
-            $this->addFlash("success", "Utilisateur supprimé !");
+            $this->addFlash("success", $this->get('translator')->trans("admin_user.delete.success",[],"controller"));
         }catch (Exception $e){
-            $this->addFlash("info", "Problème lors de la suppression");
+            $this->addFlash("info", $this->get('translator')->trans("admin_user.delete.problem",[],"controller"));
         }
         return $this->redirectToRoute('userList');
 

@@ -57,7 +57,7 @@ class PersonController extends UniqueComponentController
                 $sparqlRepository->changeImage($form->uri,$form->uri,$fileUploader->generateUrlForFile($user->getPictureName()));
                 $this->addFlash(
                     'success',
-                    'Votre image a bien été changée.'
+                    $this->get('translator')->trans("person.update.picture",[],"controller")
                 );
             } else {
                 $user->setPictureName($oldPictureName);
@@ -72,7 +72,7 @@ class PersonController extends UniqueComponentController
             if(!$newPicture){
                 $this->addFlash(
                     'success',
-                    'Votre profil a bien été mis à jour.'
+                    $this->get('translator')->trans("person.update.success",[],"controller")
                 );
             }
 
@@ -100,20 +100,20 @@ class PersonController extends UniqueComponentController
                     $dataToSave = $importManager->contentToImport($uri,$componentConf,$type);
 
                     if(is_null($dataToSave)){
-                        $this->addFlash("info","L'URI renseignée ne renvoie aucune donnée");
+                        $this->addFlash("info", $this->get('translator')->trans("person.update.no_data",[],"controller"));
 
                     }elseif(!$dataToSave){
-                        $this->addFlash("info","L'URI renseignée ne correspond pas au type d'entité que vous avez sélectionné");
+                        $this->addFlash("info", $this->get('translator')->trans("person.uri.no_corresp",[],"controller"));
 
                     }else{
-                        $this->addFlash("success","Votre profil a été importé avec succès !");
+                        $this->addFlash("success", $this->get('translator')->trans("person.uri.success",[],"controller"));
                         $testForm->submit($dataToSave);
 
                         $contextManager->setContext($uri,null);
                     }
 
                 }else{
-                    $this->addFlash("info","L'URI existe déjà");
+                    $this->addFlash("info", $this->get('translator')->trans("person.uri.already_exist",[],"controller"));
                 }
 
                 if(!$id)
@@ -143,9 +143,9 @@ class PersonController extends UniqueComponentController
             $type = array_merge([$componentConf['type']],$componentConf['otherType']);
             $dataToSave = $importManager->contentToImport($user->getSfLink(),$componentConf,$type);
             $testForm->submit($dataToSave,false);
-            $this->addFlash('success','Actualisation ok !');
+            $this->addFlash('success', $this->get('translator')->trans("person.reload.success",[],"controller"));
         }else{
-            $this->addFlash('info',"Problème lors de l'actualisation !");
+            $this->addFlash('info', $this->get('translator')->trans("person.reload.problem",[],"controller"));
 
         }
 
@@ -164,14 +164,14 @@ class PersonController extends UniqueComponentController
             $em->persist($user);
             try {
                 $em->flush();
-                $this->addFlash('success',"Le profil de l'utilisateur a été supprimé avec succès");
+                $this->addFlash('success', $this->get('translator')->trans("person.delete.success",[],"controller"));
             } catch (UniqueConstraintViolationException $e) {
-                $this->addFlash('danger', "Problème lors de la suppression du profil");
+                $this->addFlash('danger', $this->get('translator')->trans("person.delete.problem",[],"controller"));
                 return $this->redirectToRoute('personComponentFormWithoutId',['uniqueComponentName' => $uniqueComponentName]);
 
             }
         }else{
-            $this->addFlash('success',"L'utilisateur courant n'a pas d'URI");
+            $this->addFlash('success', $this->get('translator')->trans("person.delete.no_uri",[],"controller"));
         }
 
         return $this->redirectToRoute('personComponentFormWithoutId',["uniqueComponentName" => $uniqueComponentName]);
