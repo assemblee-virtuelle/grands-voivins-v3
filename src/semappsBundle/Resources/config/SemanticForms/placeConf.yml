@@ -44,6 +44,12 @@ parameters:
         http://virtual-assembly.org/pair#adressLine2:
           value: 'complementAddress'
           access: 'anonymous'
+        http://virtual-assembly.org/pair#e-mail:
+          value: 'email'
+          access: 'member'
+        http://virtual-assembly.org/pair#phone:
+          value: 'phone'
+          access: 'member'
         http://virtual-assembly.org/pair#comment:
           value: 'comment'
           access: 'anonymous'
