@@ -43,6 +43,18 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-4 formEditAvatar">
+                    {% if form is not null %}
+                        <a href="#" id="profilePicture" class="thumbnail" data-toggle="tooltip" data-placement="bottom" title="Cliquez ici pour télécharger une image (2Mo max !)">
+                            <img src="{{ asset(image == null ? 'common/images/no_avatar.png' : 'uploads/pictures/'~image) | imagine_filter('profile') }}"/>
+                            <span id="profileEditPictureField">
+                            {{ form_widget(form.componentPicture) }}
+                        </span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
                     {{ form_row(form.address) }}
                 </div>
@@ -50,6 +62,14 @@
             <div class="row">
                 <div class="col-sm-12">
                     {{ form_row(form.complementAddress) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-xs-6">
+                    {{ form_row(form.phone) }}
                 </div>
             </div>
             <div class="row">
