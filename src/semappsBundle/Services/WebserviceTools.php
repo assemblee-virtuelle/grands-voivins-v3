@@ -197,7 +197,7 @@ class WebserviceTools
                 ->addOptional('?uri','pair:comment','?desc','?GR');
             //$serviceSparql->addOptional('?uri','pair:building','?building','?GR');
             if($term)$serviceSparql->addFilter('contains( lcase(?title)  , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) || contains( lcase(?address) , lcase("'.$term.'"))');
-            $results = $this->sfClient->sparql($goodSparql->getQuery());
+            $results = $this->sfClient->sparql($serviceSparql->getQuery());
             $services= $this->sfClient->sparqlResultsValues($results,'uri');
         }
         $places = [];
