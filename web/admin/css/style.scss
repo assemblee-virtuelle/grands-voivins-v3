@@ -198,15 +198,16 @@ input.form-control {
 
 .container-auth {
   position: relative;
-  height: 800px;
-  min-height: 500px;
+  //height: 600px;
+  //min-height: 500px;
   width: 100%;
-  background: #161415; //url(../../common/images/banner.jpg) no-repeat top center;
+  background: #161415 url(../../common/images/banner.jpg) no-repeat top center;
   background-size: cover !important;
   -webkit-background-size: cover !important;
   text-align: center;
-  overflow: hidden;
+  overflow: scroll;
 }
+
 
 .navbar-default .navbar-nav > .main {
   background: #F0F0F0;
@@ -270,10 +271,8 @@ input.form-control {
 
 .block-banner-overflow,
 .block-banner-overflow-transparent {
-  //vertical-align: middle;
-  //margin-top: 450px;
-  margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
-  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+  margin-top: 350px;
+  margin-bottom: 350px;
   padding: 10px 40px;
 }
 

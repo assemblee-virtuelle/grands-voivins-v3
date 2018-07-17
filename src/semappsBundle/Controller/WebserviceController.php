@@ -38,7 +38,7 @@ class WebserviceController extends Controller
         foreach ($results as $item) {
             $thesaurus[] = [
                 'uri'   => $item['uri'],
-                'label' => $item['title'],
+                'label' => $item[$thematicConf['fields'][$thematicConf['label'][0]]['value']],
             ];
         }
 
@@ -83,8 +83,8 @@ class WebserviceController extends Controller
         $sparqlRepository = $this->get('semapps_bundle.sparql_repository');
         $results =  $resultsTemp = $webserviceTools->searchSparqlRequest(
             $request->get('term'),
-            ''
-            ,$request->get('filter'),
+            $request->get('type'),
+            $request->get('filter'),
             true
         );
         $confTemp = [];

@@ -259,7 +259,7 @@
                     return '/common/images/result-no_picture-' + semapps.entities[key].nameType + '.png';
                 else
                     return null;
-            } else if (path.indexOf("http")) {
+            } else if (path.indexOf("http") !== -1) {
                 return path;
             }
             return window.location.host + path;
