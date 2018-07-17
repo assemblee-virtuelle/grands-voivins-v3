@@ -32,8 +32,17 @@
           <label for="isGV">Limiter la recherche aux acteurs présents sur la phase 2 des Grands Voisins</label>
           <input class="checked" type="checkbox" id="isGV" checked="true" on-change="callsearch">
         </span>
-        <div id="searchResults" class="col col-sm-12">
-        </div>
+        <template is="dom-if" if="[[orga]]">
+          <div class="list-separator">SITUÉ AUX GRANDS VOISINS</div>
+        </template>
+        <div id="searchResults" class="col col-sm-12"></div>
+        <template is="dom-if" if="[[otherArray.length]]">
+          <div class="list-separator">AILLEURS</div>
+          <template is="dom-repeat" items="{{otherArray}}">
+            <semapps-results-organization data="[[item]]"></semapps-results-organization>
+          </template>
+        </template>
+
         <template is="dom-if" if="[[searchError]]">
           <div id="semapps-results-error" class="alert alert-danger">Une erreur c'est
             produite lors du chargement...

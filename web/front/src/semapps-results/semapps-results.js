@@ -24,6 +24,10 @@ Polymer({
             type: Array,
             value: []
         },
+        otherArray: {
+            type: Array,
+            value: []
+        },
         searchLastTerm: {
             type: String,
             value: null
@@ -80,6 +84,12 @@ Polymer({
                 this.search(split[2],split[1]);
             });
         }
+    },
+
+    callsearch(ev){
+        let checkbox = $(document.getElementById("isGV"));
+        checkbox.toggleClass('checked');
+        this.searchRender();
     },
 
     search(term, building) {
@@ -173,8 +183,14 @@ Polymer({
                 }
             }
             //log(resultTemps[this.typeSelected]);
+            this.otherArray = [];
             results = (typeof resultTemps[this.typeSelected] !== 'undefined' )? resultTemps[this.typeSelected] : [];//resultTemps[this.typeSelected];
-
+            results = results = this.filterNonGrandVoisins(results);
+            if(this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+                this.set('orga', true);
+            } else {
+                this.set('orga', false);
+            }
             // Create title.
             let resultsTitle = '';
             // Results number.
@@ -182,9 +198,6 @@ Polymer({
             // Building.
             // Display title.
             this.resultsTitle = resultsTitle;
-
-            log(semapps.entities[this.typeSelected].nameType.toLowerCase());
-            log(results.length);
 
             // Display no results section or not.
             this.noResult = results.length === 0;
@@ -197,6 +210,7 @@ Polymer({
                 inner.parent = this;
                 domInner.appendChild(inner);
             }
+
             // Show pins with results only.
             if(typeof semapps.schema !== 'undefined'){
                 semapps.schema.pinHideAll();
@@ -213,6 +227,9 @@ Polymer({
             this.tabsRegistry[entity] && (this.tabsRegistry[entity].counter = typesCounter[entity] );
         }
         setTimeout(() => {
+            if(this.otherArray.length !== 0){
+                this.set('otherArray', this.otherArray);
+            }
             this.set('results', results);
         }, 100);
     },
@@ -231,5 +248,44 @@ Polymer({
             this.search()
         }
 
+    },
+
+    filterNonGrandVoisins(results){
+        let isgv = true;
+        let filter = document.getElementById("orgaGvFilter");
+        let checkbox = document.getElementById("isGV");
+
+        if ($(checkbox).hasClass('checked') == true){
+            isgv = true;
+        } else {
+            isgv = false;
+        }
+        if (this.typeSelected === "http://virtual-assembly.org/pair#Organization"){
+            filter.style.display = "initial";
+            let filteredResults = [];
+            let gvArray = [];
+            let otherArray = [];
+
+            results.forEach((e) => {
+                if (e["address"] === "74 Avenue Denfert-Rochereau 75014 Paris" ||
+                    e["address"] === "72 Avenue Denfert-Rochereau 75014 Paris" ||
+                    e["address"] === "82 Avenue Denfert-Rochereau 75014 Paris"){
+                    e["gv"] = true;
+                    gvArray.push(e);
+                } else {
+                    e["gv"] = false;
+                    otherArray.push(e);
+                }
+            });
+
+            if (isgv == true)
+                this.otherArray = [];
+            else
+                this.otherArray = otherArray;
+            results = gvArray;
+        } else{
+            filter.style.display = "none";
+        }
+        return results;
     }
 });
