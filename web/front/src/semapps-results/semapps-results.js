@@ -77,7 +77,7 @@ Polymer({
             window.SemAppsCarto.ready(() => {
                 let split = data.path.split('/');
                 //log(split)
-                this.search(split[1]);
+                this.search(split[2],split[1]);
             });
         }
     },
@@ -137,6 +137,7 @@ Polymer({
         let totalCounter = 0;
         let typesCounter = {};
         let resultTemps = {};
+        let buildingsCounter = {};
         // Allow empty response.
         response = response || this.renderSearchResultResponse || {};
         // Save last data for potential reload.
@@ -146,30 +147,30 @@ Polymer({
         }
         else if (response.results) {
             semapps.map.pinHideAll();
-
-
-
             for (let result of response.results) {
-                // // Data is allowed.
-                // if(semapps.entities[result.type]){
-                // log(result.type);
-                typesCounter[this.typeSelected] = typesCounter[this.typeSelected] || 0;
-                typesCounter[this.typeSelected]++;
-                totalCounter++;
-
-                if (typeof resultTemps[this.typeSelected] === 'undefined')
-                    resultTemps[this.typeSelected] = [];
-                resultTemps[this.typeSelected].push(result);
-                // log(resultTemps);
-                if(result["address"]){
-                    if( semapps.map.pins[result["uri"]] === undefined){
-                        semapps.getAddressToCreatePoint(result["address"],result["title"],result["type"],result["uri"]);
+                // Data is allowed.
+                if(semapps.buildingSelected === semapps.buildingSelectedAll || result.building === semapps.buildingSelected ){
+                    // log(result.type);
+                    typesCounter[this.typeSelected] = typesCounter[this.typeSelected] || 0;
+                    typesCounter[this.typeSelected]++;
+                    totalCounter++;
+                    if (semapps.buildings[result.building]) {
+                        buildingsCounter[result.building] = buildingsCounter[result.building] || 0;
+                        buildingsCounter[result.building]++;
                     }
-                    else{
-                        semapps.map.pinShow(result["uri"]);
+                    if (typeof resultTemps[this.typeSelected] === 'undefined')
+                        resultTemps[this.typeSelected] = [];
+                    resultTemps[this.typeSelected].push(result);
+                    // log(resultTemps);
+                    if(result["address"]){
+                        if( semapps.map.pins[result["uri"]] === undefined){
+                            semapps.getAddressToCreatePoint(result["address"],result["title"],result["type"],result["uri"]);
+                        }
+                        else{
+                            semapps.map.pinShow(result["uri"]);
+                        }
                     }
                 }
-                // }
             }
             //log(resultTemps[this.typeSelected]);
             results = (typeof resultTemps[this.typeSelected] !== 'undefined' )? resultTemps[this.typeSelected] : [];//resultTemps[this.typeSelected];
@@ -196,7 +197,15 @@ Polymer({
                 inner.parent = this;
                 domInner.appendChild(inner);
             }
-
+            // Show pins with results only.
+            if(typeof semapps.schema !== 'undefined'){
+                semapps.schema.pinHideAll();
+                $.each(semapps.buildings, (building) => {
+                    if (buildingsCounter[building] || building === semapps.buildingSelected) {
+                        semapps.schema.pinShow(building, buildingsCounter[building] || 0);
+                    }
+                });
+            }
         }
 
         this.tabsRegistry.all && (this.tabsRegistry.all.counter = totalCounter);

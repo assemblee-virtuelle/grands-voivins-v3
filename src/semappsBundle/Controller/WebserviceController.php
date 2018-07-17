@@ -65,6 +65,8 @@ class WebserviceController extends Controller
                 'typeToName'      => $this->getParameter("typeToName"),
                 'graphToName'      => $this->getParameter("graphToName"),
                 'thesaurus'     => $thesaurus,
+                'buildings'     => [],
+//                'buildings'     => semappsConfig::$buildings,
             ];
         }
 
