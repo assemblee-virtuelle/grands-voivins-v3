@@ -1,3 +1,5 @@
+/*#region Couleurs Batiments*/
+/*#endregion */
 #ressourceTools {
   border-bottom: 1px dashed #EEE; }
   #ressourceTools a {
@@ -14,6 +16,8 @@
   width: 100%;
   margin: 20px 0; }
 
+/*#region Couleurs Batiments*/
+/*#endregion */
 h3 {
   font-size: 16px;
   color: #CCC; }

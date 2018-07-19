@@ -149,6 +149,11 @@ parameters:
            value: 'skill'
            access: 'anonymous'
            type: 'dbpedia'
+        http://virtual-assembly.org/pair#building: #person + orga
+           value: 'building'
+           access: 'anonymous'
+           type: 'text'
+
 
       reverse:
         http://virtual-assembly.org/pair#knows: 'http://virtual-assembly.org/pair#knows'
@@ -165,3 +170,4 @@ parameters:
         - http://virtual-assembly.org/pair#comment
         - http://virtual-assembly.org/pair#image
         - http://virtual-assembly.org/pair#adress
+        - http://virtual-assembly.org/pair#building

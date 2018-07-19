@@ -204,6 +204,15 @@ class PersonType extends SemanticFormType
                     'required'  => false,
                 ]
             )
+            ->add(
+                $builder,
+                'building',
+                ChoiceType::class,
+                [
+                    'placeholder' => 'choisissez un batiment',
+                    'choices' => array_flip(semappsConfig::$buildingsSimple),
+                ]
+            )
         ;
 
         $builder->add(
