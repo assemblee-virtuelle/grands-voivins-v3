@@ -1,0 +1,27 @@
+// #semapps-map-wrapper{
+//     margin:0 auto;
+//     margin-top:120px;
+//     margin-bottom:10px;
+//     width:75%;
+// }
+
+#switch-axo{
+    text-align:center;
+    width:100px;
+    height:100px;
+    margin:0 auto;
+    border:2px solid black;
+    cursor: pointer;
+    border-radius:50%;
+    margin-bottom:10px;
+}
+
+#switch-axo img{
+    border-radius:50%;
+    height: 95px;
+    width: 95px;
+}
+
+#switch-axo:hover{
+    border:2px solid green;
+}

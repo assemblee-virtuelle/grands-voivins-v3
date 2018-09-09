@@ -1,19 +1,28 @@
 @import "./../../../common/css/color.scss";
 
-//#my-account-link {
-//  z-index: 10;
-//  position: fixed;
-//  bottom: 30px;
-//  left: 30px;
-//  background-color: #1e90ff;
-//  border-radius: 1000px;
-//  padding: 20px;
-//  color: #333;
-//  width: 60px;
-//  height: 60px;
-//  text-align: center;
-//  box-shadow: -1px 2px 2px rgba(0, 0, 0, .2);
-//}
+#semapps-carto{
+  display:flex;
+  flex-direction:column;
+}
+
+#semapps-body{
+  display:flex;
+  margin-top:100px;
+  flex-direction:column;
+  
+}
+
+semapps-map-wrapper{
+  width:80%;
+  margin:0 auto;
+  padding-right:5px;
+}
+
+#results{
+  padding-left:5px;
+  margin:0 auto;
+  width:80%;
+}
 
 footer {
   letter-spacing: 5px;

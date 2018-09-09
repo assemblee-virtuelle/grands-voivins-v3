@@ -3,39 +3,42 @@
   <link rel="import" href="../semapps-header/semapps-header.html">
   <link rel="import" href="../semapps-logo-animated/semapps-logo-animated.html">
   <link rel="import" href="../semapps-map/semapps-map.html">
+  <link rel="import" href="../semapps-axo/semapps-axo.html">
+  <link rel="import" href="../semapps-map-wrapper/semapps-map-wrapper.html">
   <link rel="import" href="../semapps-results/semapps-results.html">
   <link rel="import" href="../semapps-ressource/semapps-ressource.html">
   <link rel="import" href="../semapps-detail/semapps-detail.html">
   <link rel="import" href="../semapps-prez/semapps-prez.html">
   <template>
-    <div id="semapps-carto">
-      <semapps-header></semapps-header>
-      <!--<semapps-prez></semapps-prez>-->
-      <semapps-map></semapps-map>
-      <div class="container">
-        <!-- app-location binds with the URL and produces a route for
-        app-route elements to consume. Since this demo needs to run without
-        server cooperation (e.g. with polyserve, in the elements catalog, etc) we'll
-        use the hash portion of the URL for our route paths. -->
-        <app-location route='{{route}}'
-                      query-params="{{queryParams}}"></app-location>
-
-        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}"
-                   tail="{{searchTail}}"></app-route>
-
-        <div id="pageContent"></div>
-        <iron-pages selected="[[routeData.page]]" attr-for-selected="name">
-          <semapps-results name="rechercher"
-                           route="{{searchTail}}"></semapps-results>
-          <semapps-detail name="detail"
-                          route="{{routeData}}"
-                          query-params="{{queryParams}}"></semapps-detail>
-          <semapps-ressource name="ressource"
-                             route="{{routeData}}"
-                             query-params="{{queryParams}}"></semapps-ressource>
-        </iron-pages>
+      <div id="semapps-carto">
+          <semapps-header></semapps-header>
+          <div id="semapps-body">
+            <semapps-map-wrapper></semapps-map-wrapper>
+            <div id="results">
+              <!-- app-location binds with the URL and produces a route for
+              app-route elements to consume. Since this demo needs to run without
+              server cooperation (e.g. with polyserve, in the elements catalog, etc) we'll
+              use the hash portion of the URL for our route paths. -->
+              <app-location route='{{route}}'
+                            query-params="{{queryParams}}"></app-location>
+    
+              <app-route route="{{route}}" pattern="/:page" data="{{routeData}}"
+                        tail="{{searchTail}}"></app-route>
+    
+              <div id="pageContent"></div>
+              <iron-pages selected="[[routeData.page]]" attr-for-selected="name">
+                <semapps-results name="rechercher"
+                                route="{{searchTail}}"></semapps-results>
+                <semapps-detail name="detail"
+                                route="{{routeData}}"
+                                query-params="{{queryParams}}"></semapps-detail>
+                <semapps-ressource name="ressource"
+                                  route="{{routeData}}"
+                                  query-params="{{queryParams}}"></semapps-ressource>
+              </iron-pages>
+            </div>
+          </div>
       </div>
-
       <!-- Overlay -->
       <!--<semapps-logo-animated></semapps-logo-animated>-->
       <footer>
@@ -53,7 +56,6 @@
         <br>
         2017
       </footer>
-    </div>
   </template>
   <script src="../../../bower_components/jquery.easing/js/jquery.easing.min.js"></script>
   <script src="../../../bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>

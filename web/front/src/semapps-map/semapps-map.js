@@ -72,6 +72,7 @@ Polymer({
                 markerColor: 'black'
             }),
         }
+        this.domHost.setOSM(this.OSM);
         hider();
 
     },
