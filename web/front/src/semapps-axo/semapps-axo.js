@@ -29,33 +29,33 @@ Polymer({
                     el.style.fill = "transparent";
                 })
                 fills[index].className.baseVal = "red";
-                switch (batiment.id) {
+                switch (batiment.id) { //TODO: A changer vers une maniere plus generique par fichier de conf
                     case 'CED':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/6349042113-2132451547');
                         break;
                     case 'Pinard':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/6561133263-2120997963');
                         break;
                     case 'Lingerie':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/8046535766-7531738953');
                         break;
                     case 'Colombani':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/1862408720-1222076375');
                         break;
                     case 'Rapine':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/6399501207-2309910533');
                         break;
                     case 'Pierre_petit':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/9416106748-5109974912');
                         break;
                     case 'Cour_Robin':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/7237770507-7666579130');
                         break;
                     case 'Cour_Oratoire_1_':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/6954970359-6996007704');
                         break;
                     case 'Selection_2_':
-                    this.goToDetail('#');
+                    this.goToDetail('https://reseau.lesgrandsvoisins.org:9000/ldp/6164322723-4376675404');
                         break;
                     default:
                         break;
